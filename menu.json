@@ -20,6 +20,22 @@
         "fr": "Offre spéciale! 10% de réduction sur la paella aujourd'hui.",
         "de": "Spezialangebot! 10% Rabatt auf Paella heute."
       }
+    },
+    "allergenSettings": {
+      "Gluten": { "icon": "🌾", "color": "#D4A574" },
+      "Crustáceos": { "icon": "🦐", "color": "#FF6B6B" },
+      "Huevo": { "icon": "🥚", "color": "#FFD93D" },
+      "Pescado": { "icon": "🐟", "color": "#6B9BD1" },
+      "Cacahuetes": { "icon": "🥜", "color": "#B8860B" },
+      "Frutos secos": { "icon": "🌰", "color": "#8B6914" },
+      "Apio": { "icon": "🌿", "color": "#52B788" },
+      "Mostaza": { "icon": "🫒", "color": "#FFB703" },
+      "Sésamo": { "icon": "🌾", "color": "#C4A747" },
+      "Sulfitos": { "icon": "⚗️", "color": "#9D4EDD" },
+      "Altramuces": { "icon": "🌺", "color": "#FF006E" },
+      "Moluscos": { "icon": "🦪", "color": "#FF99C8" },
+      "Lácteos": { "icon": "🥛", "color": "#F0F0F0" },
+      "Soja": { "icon": "🫘", "color": "#D4A373" }
     }
   },
   "categories": [

@@ -362,9 +362,9 @@
     }
     .allergen-list { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
     .allergen-tag {
-      font-size: 0.72rem; padding: 0.25rem 0.6rem;
-      border-radius: 10px; background: #FFF0E8;
-      color: var(--rust); border: 1px solid rgba(196,92,38,0.2);
+      font-size: 0.82rem; padding: 0.35rem 0.7rem;
+      border-radius: 8px; background: #f0f0f0;
+      color: var(--charcoal); display: flex; align-items: center; gap: 0.3rem;
     }
     .qty-row {
       display: flex; align-items: center; gap: 1rem;
@@ -884,8 +884,13 @@ function openDetail(itemId) {
   const tags = (item.tags && tField(item.tags)) || [];
   const tagsHtml = Array.isArray(tags) && tags.length
     ? `<div class="card-tags" style="margin-bottom:1rem">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
+  
+  const allergenSettings = menuData.restaurant.allergenSettings || {};
   const allergenHtml = Array.isArray(allergens) && allergens.length
-    ? allergens.map(a => `<span class="allergen-tag">⚠ ${a}</span>`).join('')
+    ? allergens.map(a => {
+        const settings = allergenSettings[a] || { icon: '⚠', color: '#FFF0E8' };
+        return `<span class="allergen-tag" style="background-color: ${settings.color};">${settings.icon} ${a}</span>`;
+      }).join('')
     : `<span style="font-size:0.82rem;color:#9A9080">${t('noAllergens')}</span>`;
 
   document.getElementById('detail-inner').innerHTML = `
