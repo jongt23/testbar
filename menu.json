@@ -9,7 +9,18 @@
     },
     "logo": "",
     "currency": "€",
-    "languages": ["es", "en", "fr", "de"]
+    "languages": ["es", "en", "fr", "de"],
+    "activeLanguages": ["es", "en", "fr", "de"],
+    "offers": {
+      "enabled": true,
+      "delay": 2000,
+      "message": {
+        "es": "¡Oferta especial! 10% descuento en paella hoy.",
+        "en": "Special offer! 10% discount on paella today.",
+        "fr": "Offre spéciale! 10% de réduction sur la paella aujourd'hui.",
+        "de": "Spezialangebot! 10% Rabatt auf Paella heute."
+      }
+    }
   },
   "categories": [
     {
