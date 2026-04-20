@@ -582,6 +582,16 @@
   </div>
 </div>
 
+<!-- ALERT MODAL -->
+<div id="alert-modal" class="modal">
+  <div class="modal-content">
+    <button class="close-modal-btn" onclick="closeAlertModal()">✕</button>
+    <h2>Atención</h2>
+    <p id="alert-message"></p>
+    <button class="modal-btn" onclick="closeAlertModal()">Aceptar</button>
+  </div>
+</div>
+
 <!-- HEADER -->
 <header>
   <div class="header-inner">
@@ -738,6 +748,15 @@ function showOfferModal() {
 
 function closeOfferModal() {
   document.getElementById('offer-modal').style.display = 'none';
+}
+
+function showAlertModal(message) {
+  document.getElementById('alert-message').textContent = message;
+  document.getElementById('alert-modal').style.display = 'flex';
+}
+
+function closeAlertModal() {
+  document.getElementById('alert-modal').style.display = 'none';
 }
 
 // ── LOAD DATA ──────────────────────────────────────────────────────────────
@@ -1008,11 +1027,11 @@ function sendOrderWhatsApp() {
   const isTableSet = tableNumber && Number(tableNumber) > 0;
   const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
   if (!isTableSet) {
-    alert(t('tableNumberRequired'));
+    showAlertModal(t('tableNumberRequired'));
     return;
   }
   if (tableAuthEnabled && !isTableCodeValid) {
-    alert(t('tableCodeInvalid'));
+    showAlertModal(t('tableCodeInvalid'));
     return;
   }
   const itemsList = items.map(o => `- ${o.qty}x ${o.item.name.es || tField(o.item.name)}`).join('\n');
