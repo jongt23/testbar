@@ -14,28 +14,51 @@
     "offers": {
       "enabled": true,
       "delay": 2000,
+      "title": {
+        "es": "¡Oferta especial!",
+        "en": "Special offer!",
+        "fr": "Offre spéciale!",
+        "de": "Spezialangebot!"
+      },
       "message": {
-        "es": "¡Oferta especial! 10% descuento en paella hoy.",
-        "en": "Special offer! 10% discount on paella today.",
-        "fr": "Offre spéciale! 10% de réduction sur la paella aujourd'hui.",
-        "de": "Spezialangebot! 10% Rabatt auf Paella heute."
+        "es": "¡10% de descuento en paella hoy! No te lo pierdas.",
+        "en": "10% off paella today! Don't miss it.",
+        "fr": "10% de réduction sur la paella aujourd'hui! Ne manquez pas.",
+        "de": "10% Rabatt auf Paella heute! Verpassen Sie es nicht."
       }
     },
-    "allergenSettings": {
-      "Gluten": { "icon": "🌾", "color": "#D4A574" },
-      "Crustáceos": { "icon": "🦐", "color": "#FF6B6B" },
-      "Huevo": { "icon": "🥚", "color": "#FFD93D" },
-      "Pescado": { "icon": "🐟", "color": "#6B9BD1" },
-      "Cacahuetes": { "icon": "🥜", "color": "#B8860B" },
-      "Frutos secos": { "icon": "🌰", "color": "#8B6914" },
-      "Apio": { "icon": "🌿", "color": "#52B788" },
-      "Mostaza": { "icon": "🫒", "color": "#FFB703" },
-      "Sésamo": { "icon": "🌾", "color": "#C4A747" },
-      "Sulfitos": { "icon": "⚗️", "color": "#9D4EDD" },
-      "Altramuces": { "icon": "🌺", "color": "#FF006E" },
-      "Moluscos": { "icon": "🦪", "color": "#FF99C8" },
-      "Lácteos": { "icon": "🥛", "color": "#F0F0F0" },
-      "Soja": { "icon": "🫘", "color": "#D4A373" }
+    "whatsapp": {
+      "enabled": true,
+      "phoneNumber": "+34684003699"
+    },    "tableCodes": {
+      "enabled": true,
+      "tables": {
+        "1": "MESA01",
+        "2": "MESA02",
+        "3": "MESA03",
+        "4": "MESA04"
+      },
+      "hint": {
+        "es": "Introduce el código impreso en tu mesa",
+        "en": "Enter the code printed on your table",
+        "fr": "Entrez le code imprimé sur votre table",
+        "de": "Geben Sie den auf Ihrem Tisch aufgedruckten Code ein"
+      }
+    },    "allergenSettings": {
+      "Gluten": { "icon": "🌾", "color": "#D4A574", "translations": { "es": "Gluten", "en": "Gluten", "fr": "Gluten", "de": "Gluten" } },
+      "Crustáceos": { "icon": "🦐", "color": "#FF6B6B", "translations": { "es": "Crustáceos", "en": "Shellfish", "fr": "Crustacés", "de": "Krebstiere" } },
+      "Huevo": { "icon": "🥚", "color": "#FFD93D", "translations": { "es": "Huevo", "en": "Egg", "fr": "Œuf", "de": "Ei" } },
+      "Pescado": { "icon": "🐟", "color": "#6B9BD1", "translations": { "es": "Pescado", "en": "Fish", "fr": "Poisson", "de": "Fisch" } },
+      "Cacahuetes": { "icon": "🥜", "color": "#B8860B", "translations": { "es": "Cacahuetes", "en": "Peanuts", "fr": "Arachides", "de": "Erdnüsse" } },
+      "Frutos secos": { "icon": "🌰", "color": "#8B6914", "translations": { "es": "Frutos secos", "en": "Nuts", "fr": "Fruits à coque", "de": "Nüsse" } },
+      "Apio": { "icon": "🌿", "color": "#52B788", "translations": { "es": "Apio", "en": "Celery", "fr": "Céleri", "de": "Sellerie" } },
+      "Mostaza": { "icon": "🫒", "color": "#FFB703", "translations": { "es": "Mostaza", "en": "Mustard", "fr": "Moutarde", "de": "Senf" } },
+      "Sésamo": { "icon": "🌾", "color": "#C4A747", "translations": { "es": "Sésamo", "en": "Sesame", "fr": "Sésame", "de": "Sesam" } },
+      "Sulfitos": { "icon": "⚗️", "color": "#9D4EDD", "translations": { "es": "Sulfitos", "en": "Sulphites", "fr": "Sulfites", "de": "Sulfite" } },
+      "Altramuces": { "icon": "🌺", "color": "#FF006E", "translations": { "es": "Altramuces", "en": "Lupin", "fr": "Lupin", "de": "Lupinen" } },
+      "Moluscos": { "icon": "🦪", "color": "#FF99C8", "translations": { "es": "Moluscos", "en": "Molluscs", "fr": "Mollusques", "de": "Weichtiere" } },
+      "Lácteos": { "icon": "🥛", "color": "#F0F0F0", "translations": { "es": "Lácteos", "en": "Dairy", "fr": "Laitier", "de": "Milch" } },
+      "Soja": { "icon": "🫘", "color": "#D4A373", "translations": { "es": "Soja", "en": "Soya", "fr": "Soja", "de": "Soja" } }
     }
   },
   "categories": [
@@ -90,7 +113,7 @@
       "price": 9.00,
       "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&q=80",
       "tags": { "es": ["Casero", "Popular"], "en": ["Homemade", "Popular"], "fr": ["Fait maison", "Populaire"], "de": ["Hausgemacht", "Beliebt"] },
-      "allergens": { "es": ["Gluten", "Lácteos", "Huevo"], "en": ["Gluten", "Dairy", "Egg"], "fr": ["Gluten", "Laitier", "Œuf"], "de": ["Gluten", "Milch", "Ei"] },
+      "allergens": { "es": ["Gluten", "Lácteos", "Huevo"], "en": ["Gluten", "Lácteos", "Huevo"], "fr": ["Gluten", "Lácteos", "Huevo"], "de": ["Gluten", "Lácteos", "Huevo"] },
       "available": true
     },
     {
@@ -138,7 +161,7 @@
       "price": 19.50,
       "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
       "tags": { "es": ["Pescado fresco", "Sin gluten"], "en": ["Fresh fish", "Gluten free"], "fr": ["Poisson frais", "Sans gluten"], "de": ["Frischer Fisch", "Glutenfrei"] },
-      "allergens": { "es": ["Pescado", "Mariscos"], "en": ["Fish", "Shellfish"], "fr": ["Poisson", "Crustacés"], "de": ["Fisch", "Schalentiere"] },
+      "allergens": { "es": ["Pescado", "Crustáceos"], "en": ["Pescado", "Crustáceos"], "fr": ["Pescado", "Crustáceos"], "de": ["Pescado", "Crustáceos"] },
       "available": true
     },
     {
@@ -170,7 +193,7 @@
       "price": 6.50,
       "image": "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=800&q=80",
       "tags": { "es": ["Vegetariano", "Clásico"], "en": ["Vegetarian", "Classic"], "fr": ["Végétarien", "Classique"], "de": ["Vegetarisch", "Klassisch"] },
-      "allergens": { "es": ["Lácteos", "Huevo"], "en": ["Dairy", "Egg"], "fr": ["Laitier", "Œuf"], "de": ["Milch", "Ei"] },
+      "allergens": { "es": ["Lácteos", "Huevo"], "en": ["Lácteos", "Huevo"], "fr": ["Lácteos", "Huevo"], "de": ["Lácteos", "Huevo"] },
       "available": true
     },
     {
@@ -186,7 +209,7 @@
       "price": 5.50,
       "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
       "tags": { "es": ["Sin gluten", "Vegetariano"], "en": ["Gluten free", "Vegetarian"], "fr": ["Sans gluten", "Végétarien"], "de": ["Glutenfrei", "Vegetarisch"] },
-      "allergens": { "es": ["Frutos secos", "Huevo"], "en": ["Nuts", "Egg"], "fr": ["Fruits à coque", "Œuf"], "de": ["Nüsse", "Ei"] },
+      "allergens": { "es": ["Frutos secos", "Huevo"], "en": ["Frutos secos", "Huevo"], "fr": ["Frutos secos", "Huevo"], "de": ["Frutos secos", "Huevo"] },
       "available": true
     },
     {
@@ -202,7 +225,7 @@
       "price": 3.50,
       "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80",
       "tags": { "es": ["Local", "Sin gluten"], "en": ["Local", "Gluten free"], "fr": ["Local", "Sans gluten"], "de": ["Lokal", "Glutenfrei"] },
-      "allergens": { "es": ["Sulfitos"], "en": ["Sulphites"], "fr": ["Sulfites"], "de": ["Sulfite"] },
+      "allergens": { "es": ["Sulfitos"], "en": ["Sulfitos"], "fr": ["Sulfitos"], "de": ["Sulfitos"] },
       "available": true
     },
     {

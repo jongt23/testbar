@@ -576,7 +576,7 @@
 <div id="offer-modal" class="modal">
   <div class="modal-content">
     <button class="close-modal-btn" onclick="closeOfferModal()">✕</button>
-    <h2>¡Oferta especial!</h2>
+    <h2 id="offer-title">¡Oferta especial!</h2>
     <p id="offer-message"></p>
     <button class="modal-btn" onclick="closeOfferModal()">Aceptar</button>
   </div>
@@ -648,6 +648,8 @@ let lang = 'es';
 let menuData = null;
 let order = {}; // { itemId: { item, qty } }
 let selectedAllergens = []; // Selected allergens to highlight
+let tableNumber = ''; // Table number for orders
+let tableCode = ''; // Table verification code
 
 const LANG_META = {
   es: { flag: '🇪🇸', label: 'Español', short: 'ES' },
@@ -666,6 +668,12 @@ const I18N = {
   allergens:    { es:'Alérgenos', en:'Allergens', fr:'Allergènes', de:'Allergene' },
   noAllergens:  { es:'Sin alérgenos declarados', en:'No declared allergens', fr:'Aucun allergène déclaré', de:'Keine Allergene' },
   unavailable:  { es:'No disponible', en:'Unavailable', fr:'Indisponible', de:'Nicht verfügbar' },
+  tableNumber: { es:'Mesa', en:'Table', fr:'Table', de:'Tisch' },
+  tableNumberRequired: { es:'Debes indicar tu mesa', en:'Please enter your table number', fr:'Veuillez indiquer votre numéro de table', de:'Bitte geben Sie Ihre Tischnummer ein' },
+  tableCode: { es:'Código de mesa', en:'Table code', fr:'Code de table', de:'Tischcode' },
+  tableCodePlaceholder: { es:'Introduce el código de mesa', en:'Enter table code', fr:'Entrez le code', de:'Code eingeben' },
+  tableCodeInvalid: { es:'Código de mesa incorrecto', en:'Invalid table code', fr:'Code de table invalide', de:'Ungültiger Tischcode' },
+  sendWhatsApp: { es:'Enviar por WhatsApp', en:'Send via WhatsApp', fr:'Envoyer via WhatsApp', de:'Per WhatsApp senden' },
   tapToChange:  { es:'Cambiar idioma', en:'Change language', fr:'Changer langue', de:'Sprache ändern' },
 };
 
@@ -685,12 +693,15 @@ function getUniqueAllergens() {
 function buildAllergenFilters() {
   const list = document.getElementById('allergen-list');
   const allergens = getUniqueAllergens();
-  list.innerHTML = allergens.map(a =>
-    `<div class="allergen-item">
+  const allergenSettings = menuData.restaurant.allergenSettings || {};
+  list.innerHTML = allergens.map(a => {
+    const settings = allergenSettings[a] || {};
+    const allergenName = (settings.translations && settings.translations[lang]) || a;
+    return `<div class="allergen-item">
       <input type="checkbox" class="allergen-checkbox" id="allergen-${a}" ${selectedAllergens.includes(a) ? 'checked' : ''} onchange="toggleAllergen('${a}')">
-      <label for="allergen-${a}" class="allergen-label">${a}</label>
-    </div>`
-  ).join('');
+      <label for="allergen-${a}" class="allergen-label">${allergenName}</label>
+    </div>`;
+  }).join('');
 }
 
 function toggleAllergen(allergen) {
@@ -765,8 +776,10 @@ function selectLang(l) {
   // Mostrar oferta si está habilitada
   if (menuData && menuData.restaurant.offers && menuData.restaurant.offers.enabled) {
     const delay = menuData.restaurant.offers.delay || 2000;
+    const title = tField(menuData.restaurant.offers.title);
     const message = tField(menuData.restaurant.offers.message);
     setTimeout(() => {
+      document.getElementById('offer-title').textContent = title;
       document.getElementById('offer-message').textContent = message;
       showOfferModal();
     }, delay);
@@ -889,7 +902,8 @@ function openDetail(itemId) {
   const allergenHtml = Array.isArray(allergens) && allergens.length
     ? allergens.map(a => {
         const settings = allergenSettings[a] || { icon: '⚠', color: '#FFF0E8' };
-        return `<span class="allergen-tag" style="background-color: ${settings.color};">${settings.icon} ${a}</span>`;
+        const allergenName = (settings.translations && settings.translations[lang]) || a;
+        return `<span class="allergen-tag" style="background-color: ${settings.color};">${settings.icon} ${allergenName}</span>`;
       }).join('')
     : `<span style="font-size:0.82rem;color:#9A9080">${t('noAllergens')}</span>`;
 
@@ -976,9 +990,32 @@ function clearOrder() {
 function sendOrderWhatsApp() {
   const items = Object.values(order);
   if (!items.length) return;
+  
+  const whatsappConfig = menuData.restaurant.whatsapp;
+  if (!whatsappConfig || !whatsappConfig.phoneNumber) return;
+  
   const totalPrice = items.reduce((s, { item, qty }) => s + item.price * qty, 0);
-  const text = items.map(o => `${o.qty}x ${tField(o.item.name)}`).join('\n') + `\nTotal: ${menuData.restaurant.currency}${totalPrice.toFixed(2)}`;
-  const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+  const restaurantName = menuData.restaurant.name;
+  
+  const tableConfig = menuData.restaurant.tableCodes || {};
+  const tableAuthEnabled = !!(tableConfig.enabled && tableConfig.tables && Object.keys(tableConfig.tables).length);
+  const expectedCode = tableAuthEnabled ? (tableConfig.tables[tableNumber] || '') : '';
+  const isTableSet = tableNumber && Number(tableNumber) > 0;
+  const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
+  if (!isTableSet) {
+    alert(t('tableNumberRequired'));
+    return;
+  }
+  if (tableAuthEnabled && !isTableCodeValid) {
+    alert(t('tableCodeInvalid'));
+    return;
+  }
+  const itemsList = items.map(o => `- ${o.qty}x ${o.item.name.es || tField(o.item.name)}`).join('\n');
+  const tableInfo = `Mesa: ${tableNumber}${tableCode ? ` (código: ${tableCode})` : ''}\n`;
+  const text = `Nuevo pedido para ${restaurantName}:\n\n${tableInfo}${itemsList}\n\nTotal: ${menuData.restaurant.currency}${totalPrice.toFixed(2)}`;
+  
+  const phoneNumber = whatsappConfig.phoneNumber.replace(/\D/g, '');
+  const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
   window.open(url, '_blank');
 }
 
@@ -1028,14 +1065,44 @@ function renderOrderPanel() {
     </div>`;
   }).join('');
   const totalPrice = items.reduce((s, { item, qty }) => s + item.price * qty, 0);
+  const tableConfig = menuData.restaurant.tableCodes || {};
+  const tableAuthEnabled = !!(tableConfig.enabled && tableConfig.tables && Object.keys(tableConfig.tables).length);
+  const tableOptions = tableAuthEnabled ? Object.keys(tableConfig.tables) : [];
+  const isTableSet = Number(tableNumber) > 0;
+  const expectedCode = tableAuthEnabled ? (tableConfig.tables[tableNumber] || '') : '';
+  const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
+  const whatsappBtn = menuData.restaurant.whatsapp && menuData.restaurant.whatsapp.enabled 
+    ? `<button class="send-whatsapp-btn" onclick="sendOrderWhatsApp()" ${isTableCodeValid ? '' : 'disabled'}>${t('sendWhatsApp') || 'WhatsApp'}</button>`
+    : '';
+  const tableWarning = !isTableSet ? `<div class="table-warning">${t('tableNumberRequired')}</div>` : '';
+  const codeWarning = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div class="table-warning">${t('tableCodeInvalid')}</div>` : '';
+  const tableInput = tableAuthEnabled
+    ? `<select id="table-input" onchange="tableNumber = this.value; renderOrderPanel();" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">
+        <option value="">${t('tableNumber') || 'Mesa'}...</option>
+        ${tableOptions.map(num => `<option value="${num}" ${tableNumber === num ? 'selected' : ''}>${t('tableNumber') || 'Mesa'} ${num}</option>`).join('')}
+      </select>`
+    : `<input type="number" id="table-input" min="1" value="${tableNumber}" oninput="tableNumber = this.value; renderOrderPanel();" placeholder="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">`;
+  const tableCodeFields = tableAuthEnabled
+    ? `<div style="margin-top: 1rem;">
+         <label>${t('tableCode') || 'Código de mesa'}:</label>
+         <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); renderOrderPanel();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .25rem; text-transform: uppercase;">
+         ${!isTableSet ? '' : codeWarning}
+       </div>`
+    : '';
   list.innerHTML = `
     ${rows}
     <div class="order-total-row">
       <span>${t('total')}</span>
       <span>${menuData.restaurant.currency}${totalPrice.toFixed(2)}</span>
     </div>
+    <div class="table-input-row">
+      <label>${t('tableNumber') || 'Mesa / Table'}:</label>
+      ${tableInput}
+      ${tableWarning}
+      ${tableCodeFields}
+    </div>
     <button class="clear-order-btn" onclick="clearOrder()">${t('clearOrder')}</button>
-    <button class="send-whatsapp-btn" onclick="sendOrderWhatsApp()">📱 Enviar por WhatsApp</button>`;
+    ${whatsappBtn}`;
 }
 
 document.getElementById('order-fab').addEventListener('click', openOrderPanel);
