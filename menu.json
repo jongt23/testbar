@@ -1,0 +1,198 @@
+{
+  "restaurant": {
+    "name": "La Taberna del Sur",
+    "tagline": {
+      "es": "Cocina auténtica con alma",
+      "en": "Authentic cuisine with soul",
+      "fr": "Cuisine authentique avec âme",
+      "de": "Authentische Küche mit Seele"
+    },
+    "logo": "",
+    "currency": "€",
+    "languages": ["es", "en", "fr", "de"]
+  },
+  "categories": [
+    {
+      "id": "entradas",
+      "name": { "es": "Entrantes", "en": "Starters", "fr": "Entrées", "de": "Vorspeisen" },
+      "emoji": "🥗"
+    },
+    {
+      "id": "principales",
+      "name": { "es": "Platos principales", "en": "Main courses", "fr": "Plats principaux", "de": "Hauptgerichte" },
+      "emoji": "🍽️"
+    },
+    {
+      "id": "postres",
+      "name": { "es": "Postres", "en": "Desserts", "fr": "Desserts", "de": "Nachspeisen" },
+      "emoji": "🍮"
+    },
+    {
+      "id": "bebidas",
+      "name": { "es": "Bebidas", "en": "Drinks", "fr": "Boissons", "de": "Getränke" },
+      "emoji": "🥤"
+    }
+  ],
+  "items": [
+    {
+      "id": "1",
+      "category": "entradas",
+      "name": { "es": "Jamón Ibérico", "en": "Iberian Ham", "fr": "Jambon Ibérique", "de": "Iberischer Schinken" },
+      "description": {
+        "es": "Jamón ibérico de bellota curado 36 meses, cortado a cuchillo. Servido con pan con tomate y aceite virgen extra.",
+        "en": "36-month acorn-fed Iberian ham, hand-carved. Served with tomato bread and extra virgin olive oil.",
+        "fr": "Jambon ibérique de gland affiné 36 mois, découpé au couteau. Servi avec du pain à la tomate et de l'huile d'olive.",
+        "de": "36 Monate gereifter Eichelschinken, handgeschnitten. Mit Tomatenbrot und nativem Olivenöl extra."
+      },
+      "price": 18.50,
+      "image": "https://images.unsplash.com/photo-1632778149955-e80f8ceca2e8?w=800&q=80",
+      "tags": { "es": ["Sin gluten", "Artesanal"], "en": ["Gluten free", "Artisan"], "fr": ["Sans gluten", "Artisanal"], "de": ["Glutenfrei", "Handwerklich"] },
+      "allergens": { "es": [], "en": [], "fr": [], "de": [] },
+      "available": true
+    },
+    {
+      "id": "2",
+      "category": "entradas",
+      "name": { "es": "Croquetas de la Abuela", "en": "Grandma's Croquettes", "fr": "Croquettes de Grand-mère", "de": "Omas Kroketten" },
+      "description": {
+        "es": "Croquetas caseras de jamón y pollo con bechamel cremosa. Crujientes por fuera, melosas por dentro. 6 unidades.",
+        "en": "Homemade ham and chicken croquettes with creamy béchamel. Crispy outside, silky inside. 6 pieces.",
+        "fr": "Croquettes maison au jambon et poulet avec béchamel crémeuse. Croustillantes dehors, fondantes dedans. 6 pièces.",
+        "de": "Hausgemachte Schinken-Hähnchen-Kroketten mit cremiger Béchamel. Außen knusprig, innen zart. 6 Stück."
+      },
+      "price": 9.00,
+      "image": "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&q=80",
+      "tags": { "es": ["Casero", "Popular"], "en": ["Homemade", "Popular"], "fr": ["Fait maison", "Populaire"], "de": ["Hausgemacht", "Beliebt"] },
+      "allergens": { "es": ["Gluten", "Lácteos", "Huevo"], "en": ["Gluten", "Dairy", "Egg"], "fr": ["Gluten", "Laitier", "Œuf"], "de": ["Gluten", "Milch", "Ei"] },
+      "available": true
+    },
+    {
+      "id": "3",
+      "category": "entradas",
+      "name": { "es": "Gazpacho Andaluz", "en": "Andalusian Gazpacho", "fr": "Gaspacho Andalou", "de": "Andalusischer Gazpacho" },
+      "description": {
+        "es": "Sopa fría de tomate con pepino, pimiento y ajo. Receta tradicional de la abuela, servida con tropezones.",
+        "en": "Cold tomato soup with cucumber, pepper and garlic. Traditional recipe served with croutons and garnish.",
+        "fr": "Soupe froide de tomate avec concombre, poivron et ail. Recette traditionnelle servie avec garniture.",
+        "de": "Kalte Tomatensuppe mit Gurke, Paprika und Knoblauch. Traditionelles Rezept mit Einlage."
+      },
+      "price": 7.50,
+      "image": "https://images.unsplash.com/photo-1578020190125-f4f7c18bc9cb?w=800&q=80",
+      "tags": { "es": ["Vegano", "Sin gluten", "Temporada"], "en": ["Vegan", "Gluten free", "Seasonal"], "fr": ["Végétalien", "Sans gluten", "Saison"], "de": ["Vegan", "Glutenfrei", "Saison"] },
+      "allergens": { "es": [], "en": [], "fr": [], "de": [] },
+      "available": true
+    },
+    {
+      "id": "4",
+      "category": "principales",
+      "name": { "es": "Secreto Ibérico a la Brasa", "en": "Grilled Iberian Pork", "fr": "Secret Ibérique Grillé", "de": "Gegrilltes Iberisches Schwein" },
+      "description": {
+        "es": "Secreto ibérico de bellota a la brasa con guarnición de patatas bravas y pimientos de padrón asados.",
+        "en": "Acorn-fed Iberian secret cut grilled to perfection, served with bravas potatoes and roasted padron peppers.",
+        "fr": "Filet ibérique de gland grillé, servi avec pommes de terre bravas et piments de padrón rôtis.",
+        "de": "Eichel-Iberisches Schweinestück vom Grill mit Bravas-Kartoffeln und gebratenen Padron-Paprika."
+      },
+      "price": 22.00,
+      "image": "https://images.unsplash.com/photo-1558030006-450675393462?w=800&q=80",
+      "tags": { "es": ["Sin gluten", "Chef recomienda"], "en": ["Gluten free", "Chef's pick"], "fr": ["Sans gluten", "Choix du chef"], "de": ["Glutenfrei", "Empfehlung des Küchenchefs"] },
+      "allergens": { "es": [], "en": [], "fr": [], "de": [] },
+      "available": true
+    },
+    {
+      "id": "5",
+      "category": "principales",
+      "name": { "es": "Merluza a la Vasca", "en": "Basque-Style Hake", "fr": "Merlu à la Basque", "de": "Baskischer Seehecht" },
+      "description": {
+        "es": "Merluza fresca del día en salsa verde con almejas, guisantes y espárragos. Receta tradicional del País Vasco.",
+        "en": "Fresh daily hake in green sauce with clams, peas and asparagus. Traditional Basque Country recipe.",
+        "fr": "Merlu frais du jour en sauce verte avec palourdes, petits pois et asperges. Recette traditionnelle basque.",
+        "de": "Tagesfrischer Seehecht in grüner Sauce mit Muscheln, Erbsen und Spargel. Traditionelles baskisches Rezept."
+      },
+      "price": 19.50,
+      "image": "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=800&q=80",
+      "tags": { "es": ["Pescado fresco", "Sin gluten"], "en": ["Fresh fish", "Gluten free"], "fr": ["Poisson frais", "Sans gluten"], "de": ["Frischer Fisch", "Glutenfrei"] },
+      "allergens": { "es": ["Pescado", "Mariscos"], "en": ["Fish", "Shellfish"], "fr": ["Poisson", "Crustacés"], "de": ["Fisch", "Schalentiere"] },
+      "available": true
+    },
+    {
+      "id": "6",
+      "category": "principales",
+      "name": { "es": "Paella Valenciana", "en": "Valencian Paella", "fr": "Paella Valencienne", "de": "Valencianische Paella" },
+      "description": {
+        "es": "Paella tradicional con pollo, conejo y judías verdes. Mínimo 2 personas. Tiempo de preparación 25 minutos.",
+        "en": "Traditional paella with chicken, rabbit and green beans. Minimum 2 persons. Preparation time 25 minutes.",
+        "fr": "Paella traditionnelle avec poulet, lapin et haricots verts. Minimum 2 personnes. Temps de préparation 25 minutes.",
+        "de": "Traditionelle Paella mit Hähnchen, Kaninchen und grünen Bohnen. Mindestens 2 Personen. Zubereitungszeit 25 Minuten."
+      },
+      "price": 16.00,
+      "image": "https://images.unsplash.com/photo-1534080564583-6be75777b70a?w=800&q=80",
+      "tags": { "es": ["Para compartir", "Sin gluten", "Tradicional"], "en": ["To share", "Gluten free", "Traditional"], "fr": ["À partager", "Sans gluten", "Traditionnel"], "de": ["Zum Teilen", "Glutenfrei", "Traditionell"] },
+      "allergens": { "es": [], "en": [], "fr": [], "de": [] },
+      "available": true
+    },
+    {
+      "id": "7",
+      "category": "postres",
+      "name": { "es": "Crema Catalana", "en": "Catalan Cream", "fr": "Crème Catalane", "de": "Katalanische Creme" },
+      "description": {
+        "es": "Crema catalana clásica con su costra de azúcar caramelizado. Infusionada con canela y ralladura de limón.",
+        "en": "Classic Catalan cream with caramelized sugar crust. Infused with cinnamon and lemon zest.",
+        "fr": "Crème catalane classique avec sa croûte de sucre caramélisé. Infusée à la cannelle et au zeste de citron.",
+        "de": "Klassische katalanische Creme mit karamellisierter Zuckerkruste. Mit Zimt und Zitronenschale."
+      },
+      "price": 6.50,
+      "image": "https://images.unsplash.com/photo-1470124182917-cc6e71b22ecc?w=800&q=80",
+      "tags": { "es": ["Vegetariano", "Clásico"], "en": ["Vegetarian", "Classic"], "fr": ["Végétarien", "Classique"], "de": ["Vegetarisch", "Klassisch"] },
+      "allergens": { "es": ["Lácteos", "Huevo"], "en": ["Dairy", "Egg"], "fr": ["Laitier", "Œuf"], "de": ["Milch", "Ei"] },
+      "available": true
+    },
+    {
+      "id": "8",
+      "category": "postres",
+      "name": { "es": "Tarta de Santiago", "en": "Santiago Tart", "fr": "Tarte de Santiago", "de": "Santiagokuchen" },
+      "description": {
+        "es": "Tarta de almendra tradicional gallega con azúcar glas y la Cruz de Santiago. Sin harina, naturalmente sin gluten.",
+        "en": "Traditional Galician almond tart with powdered sugar and Santiago Cross. Flour-free, naturally gluten-free.",
+        "fr": "Tarte aux amandes traditionnelle galicienne avec sucre glace et Croix de Santiago. Sans farine, naturellement sans gluten.",
+        "de": "Traditioneller galizischer Mandelkuchen mit Puderzucker und Jakobskreuz. Mehllos, natürlich glutenfrei."
+      },
+      "price": 5.50,
+      "image": "https://images.unsplash.com/photo-1565958011703-44f9829ba187?w=800&q=80",
+      "tags": { "es": ["Sin gluten", "Vegetariano"], "en": ["Gluten free", "Vegetarian"], "fr": ["Sans gluten", "Végétarien"], "de": ["Glutenfrei", "Vegetarisch"] },
+      "allergens": { "es": ["Frutos secos", "Huevo"], "en": ["Nuts", "Egg"], "fr": ["Fruits à coque", "Œuf"], "de": ["Nüsse", "Ei"] },
+      "available": true
+    },
+    {
+      "id": "9",
+      "category": "bebidas",
+      "name": { "es": "Vino de la Casa", "en": "House Wine", "fr": "Vin de la Maison", "de": "Hauswein" },
+      "description": {
+        "es": "Selección de vino tinto, blanco o rosado de bodegas locales. Copa o botella. Pregunta al camarero por la selección del día.",
+        "en": "Selection of red, white or rosé wine from local wineries. Glass or bottle. Ask the waiter for today's selection.",
+        "fr": "Sélection de vin rouge, blanc ou rosé de vignobles locaux. Verre ou bouteille. Demandez au serveur la sélection du jour.",
+        "de": "Auswahl an Rot-, Weiß- oder Roséwein von lokalen Weingütern. Glas oder Flasche. Fragen Sie den Kellner nach der Tagesauswahl."
+      },
+      "price": 3.50,
+      "image": "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=800&q=80",
+      "tags": { "es": ["Local", "Sin gluten"], "en": ["Local", "Gluten free"], "fr": ["Local", "Sans gluten"], "de": ["Lokal", "Glutenfrei"] },
+      "allergens": { "es": ["Sulfitos"], "en": ["Sulphites"], "fr": ["Sulfites"], "de": ["Sulfite"] },
+      "available": true
+    },
+    {
+      "id": "10",
+      "category": "bebidas",
+      "name": { "es": "Agua con Gas / Sin Gas", "en": "Sparkling / Still Water", "fr": "Eau Gazeuse / Plate", "de": "Sprudelwasser / Stilles Wasser" },
+      "description": {
+        "es": "Agua mineral natural de manantial. Disponible con o sin gas. Botella de 500ml.",
+        "en": "Natural spring mineral water. Available sparkling or still. 500ml bottle.",
+        "fr": "Eau minérale naturelle de source. Disponible gazeuse ou plate. Bouteille 500ml.",
+        "de": "Natürliches Quellwasser. Erhältlich mit oder ohne Kohlensäure. 500ml Flasche."
+      },
+      "price": 2.00,
+      "image": "https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80",
+      "tags": { "es": ["Sin gluten", "Vegano"], "en": ["Gluten free", "Vegan"], "fr": ["Sans gluten", "Végétalien"], "de": ["Glutenfrei", "Vegan"] },
+      "allergens": { "es": [], "en": [], "fr": [], "de": [] },
+      "available": true
+    }
+  ]
+}
