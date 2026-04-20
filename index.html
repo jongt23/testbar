@@ -677,7 +677,12 @@ const I18N = {
   tapToChange:  { es:'Cambiar idioma', en:'Change language', fr:'Changer langue', de:'Sprache ändern' },
 };
 
-function t(key) { return (I18N[key] && I18N[key][lang]) || key; }
+function t(key) { 
+  if (menuData && menuData.restaurant.translations && menuData.restaurant.translations[lang] && menuData.restaurant.translations[lang][key]) {
+    return menuData.restaurant.translations[lang][key];
+  }
+  return (I18N[key] && I18N[key][lang]) || key; 
+}
 function tField(obj) { return obj && (obj[lang] || obj['es'] || obj['en'] || '') || ''; }
 
 function getUniqueAllergens() {
@@ -1074,8 +1079,8 @@ function renderOrderPanel() {
   const whatsappBtn = menuData.restaurant.whatsapp && menuData.restaurant.whatsapp.enabled 
     ? `<button class="send-whatsapp-btn" onclick="sendOrderWhatsApp()" ${isTableCodeValid ? '' : 'disabled'}>${t('sendWhatsApp') || 'WhatsApp'}</button>`
     : '';
-  const tableWarning = !isTableSet ? `<div class="table-warning">${t('tableNumberRequired')}</div>` : '';
-  const codeWarning = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div class="table-warning">${t('tableCodeInvalid')}</div>` : '';
+  const tableWarningHtml = !isTableSet ? `<div id="table-warning" class="table-warning">${t('tableNumberRequired')}</div>` : '';
+  const codeWarningHtml = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div id="code-warning" class="table-warning">${t('tableCodeInvalid')}</div>` : '';
   const tableInput = tableAuthEnabled
     ? `<select id="table-input" onchange="tableNumber = this.value; renderOrderPanel();" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">
         <option value="">${t('tableNumber') || 'Mesa'}...</option>
@@ -1085,8 +1090,8 @@ function renderOrderPanel() {
   const tableCodeFields = tableAuthEnabled
     ? `<div style="margin-top: 1rem;">
          <label>${t('tableCode') || 'Código de mesa'}:</label>
-         <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); renderOrderPanel();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .25rem; text-transform: uppercase;">
-         ${!isTableSet ? '' : codeWarning}
+         <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); updateTableValidation();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .25rem; text-transform: uppercase;">
+         ${codeWarningHtml}
        </div>`
     : '';
   list.innerHTML = `
@@ -1098,11 +1103,44 @@ function renderOrderPanel() {
     <div class="table-input-row">
       <label>${t('tableNumber') || 'Mesa / Table'}:</label>
       ${tableInput}
-      ${tableWarning}
+      ${tableWarningHtml}
       ${tableCodeFields}
     </div>
     <button class="clear-order-btn" onclick="clearOrder()">${t('clearOrder')}</button>
     ${whatsappBtn}`;
+}
+
+function updateTableValidation() {
+  const tableConfig = menuData.restaurant.tableCodes || {};
+  const tableAuthEnabled = !!(tableConfig.enabled && tableConfig.tables && Object.keys(tableConfig.tables).length);
+  const isTableSet = Number(tableNumber) > 0;
+  const expectedCode = tableAuthEnabled ? (tableConfig.tables[tableNumber] || '') : '';
+  const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
+  
+  const tableWarningEl = document.getElementById('table-warning');
+  if (tableWarningEl) {
+    tableWarningEl.innerHTML = !isTableSet ? t('tableNumberRequired') : '';
+  }
+  
+  const codeWarningEl = document.getElementById('code-warning');
+  if (codeWarningEl) {
+    codeWarningEl.innerHTML = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? t('tableCodeInvalid') : '';
+  } else if (tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid) {
+    // If code warning doesn't exist but should, add it
+    const tableCodeFields = document.querySelector('.table-input-row div[style*="margin-top: 1rem"]');
+    if (tableCodeFields) {
+      const newWarning = document.createElement('div');
+      newWarning.id = 'code-warning';
+      newWarning.className = 'table-warning';
+      newWarning.innerHTML = t('tableCodeInvalid');
+      tableCodeFields.appendChild(newWarning);
+    }
+  }
+  
+  const whatsappBtn = document.querySelector('.send-whatsapp-btn');
+  if (whatsappBtn) {
+    whatsappBtn.disabled = !isTableCodeValid;
+  }
 }
 
 document.getElementById('order-fab').addEventListener('click', openOrderPanel);

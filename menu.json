@@ -31,7 +31,7 @@
       "enabled": true,
       "phoneNumber": "+34684003699"
     },    "tableCodes": {
-      "enabled": true,
+      "enabled": false,
       "tables": {
         "1": "MESA01",
         "2": "MESA02",
@@ -59,6 +59,52 @@
       "Moluscos": { "icon": "🦪", "color": "#FF99C8", "translations": { "es": "Moluscos", "en": "Molluscs", "fr": "Mollusques", "de": "Weichtiere" } },
       "Lácteos": { "icon": "🥛", "color": "#F0F0F0", "translations": { "es": "Lácteos", "en": "Dairy", "fr": "Laitier", "de": "Milch" } },
       "Soja": { "icon": "🫘", "color": "#D4A373", "translations": { "es": "Soja", "en": "Soya", "fr": "Soja", "de": "Soja" } }
+    },
+    "translations": {
+      "es": {
+        "tableNumber": "Mesa",
+        "tableNumberRequired": "Por favor, selecciona tu número de mesa",
+        "tableCode": "Código de mesa",
+        "tableCodePlaceholder": "Introduce el código de mesa",
+        "tableCodeInvalid": "Código incorrecto. Verifica el código en tu mesa.",
+        "sendWhatsApp": "Enviar por WhatsApp",
+        "clearOrder": "Vaciar pedido",
+        "total": "Total",
+        "emptyOrder": "Tu pedido está vacío"
+      },
+      "en": {
+        "tableNumber": "Table",
+        "tableNumberRequired": "Please select your table number",
+        "tableCode": "Table code",
+        "tableCodePlaceholder": "Enter the table code",
+        "tableCodeInvalid": "Invalid code. Check the code on your table.",
+        "sendWhatsApp": "Send via WhatsApp",
+        "clearOrder": "Clear order",
+        "total": "Total",
+        "emptyOrder": "Your order is empty"
+      },
+      "fr": {
+        "tableNumber": "Table",
+        "tableNumberRequired": "Veuillez sélectionner votre numéro de table",
+        "tableCode": "Code de table",
+        "tableCodePlaceholder": "Entrez le code de table",
+        "tableCodeInvalid": "Code invalide. Vérifiez le code sur votre table.",
+        "sendWhatsApp": "Envoyer via WhatsApp",
+        "clearOrder": "Vider la commande",
+        "total": "Total",
+        "emptyOrder": "Votre commande est vide"
+      },
+      "de": {
+        "tableNumber": "Tisch",
+        "tableNumberRequired": "Bitte wählen Sie Ihre Tischnummer",
+        "tableCode": "Tischcode",
+        "tableCodePlaceholder": "Geben Sie den Tischcode ein",
+        "tableCodeInvalid": "Ungültiger Code. Überprüfen Sie den Code auf Ihrem Tisch.",
+        "sendWhatsApp": "Über WhatsApp senden",
+        "clearOrder": "Bestellung leeren",
+        "total": "Gesamt",
+        "emptyOrder": "Ihre Bestellung ist leer"
+      }
     }
   },
   "categories": [
