@@ -412,7 +412,77 @@
           ]
         }
       }
-    ]
+    ],
+    "developer": {
+      "name": "JON GLEZ",
+      "avatarText": "</>",
+      "avatarBackground": "#5B4AFF",
+      "tagline": {
+        "es": "Desarrollo web & cartas digitales",
+        "en": "Web development & digital menus",
+        "fr": "Développement web & menus numériques",
+        "de": "Webentwicklung & digitale Speisekarten"
+      },
+      "socialLinks": [
+        {
+          "type": "whatsapp",
+          "enabled": true,
+          "icon": "💬",
+          "value": "+34644700830",
+          "label": "WhatsApp"
+        },
+        {
+          "type": "email",
+          "enabled": true,
+          "icon": "✉️",
+          "value": "jongt23@gmail.com",
+          "label": "Email"
+        },
+        {
+          "type": "website",
+          "enabled": true,
+          "icon": "🌐",
+          "value": "https://microcorpset.github.io/tarjeta/",
+          "label": "WEB"
+        },
+        {
+          "type": "instagram",
+          "enabled": false,
+          "icon": "📷",
+          "value": "https://instagram.com/tuperfil",
+          "label": "Instagram"
+        },
+        {
+          "type": "telegram",
+          "enabled": true,
+          "icon": "✈️",
+          "value": "https://t.me/Jon_Glez",
+          "label": "Telegram"
+        },
+        {
+          "type": "phone",
+          "enabled": true,
+          "icon": "📞",
+          "value": "+34644700830",
+          "label": "Phone"
+        }
+      ],
+      "copyright": "2025",
+      "showInLangModal": true
+    },
+    "location": {
+      "name": "La Taberna del Sur",
+      "address": "Calle Ejemplo 12, Huelva",
+      "lat": 37.2614,
+      "lng": -6.9447,
+      "googleMapsUrl": "https://maps.google.com/?q=37.2614,-6.9447",
+      "shareMessage": {
+        "es": "¡Te comparto la ubicación de La Taberna del Sur! 📍",
+        "en": "Here's the location of La Taberna del Sur! 📍",
+        "fr": "Voici l'adresse de La Taberna del Sur ! 📍",
+        "de": "Hier ist die Adresse der La Taberna del Sur! 📍"
+      }
+    }
   },
   "categories": [
     {
