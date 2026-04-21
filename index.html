@@ -6,549 +6,386 @@
   <title>Carta del Restaurante</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  
+  <!-- DETECCIÓN TEMPRANA DEL TEMA -->
+  <script>
+    const urlParamsTheme = new URLSearchParams(window.location.search);
+    const themeParamVal = urlParamsTheme.get('theme');
+    if (themeParamVal) {
+      document.documentElement.classList.add('theme-' + themeParamVal);
+    }
+  </script>
+
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --cream: #F5F0E8;
-      --warm-white: #FDFAF5;
-      --charcoal: #1C1C1A;
-      --brown: #8B5E3C;
-      --gold: #C9A84C;
-      --gold-light: #E8D5A3;
-      --rust: #C45C26;
-      --sage: #7A8C6E;
+      /* ── TEMA CLÁSICO (POR DEFECTO) ── */
+      --page-bg: #F5F0E8;
+      --card-bg: #FDFAF5;
+      --text-main: #1C1C1A;
+      --text-muted: #6B6560;
+      --text-light: #9A9080;
+
+      --accent-1: #8B5E3C; /* Marrón */
+      --accent-2: #C9A84C; /* Dorado */
+      --action: #C45C26;   /* Teja */
+
+      --header-bg: #1C1C1A;
+      --modal-bg: #1C1C1A;
+      --topbar-bg: rgba(245, 240, 232, 0.92);
+      
+      --border-color: rgba(139,94,60,0.15);
+      --tag-bg: #E8D5A3;
+      --tag-text: #8B5E3C;
+      --allergen-bg: #EAE5DE;
+      --allergen-text: #1C1C1A;
       --shadow: rgba(28,28,26,0.12);
+      --btn-text: #F5F0E8;
+
       --font-display: 'Playfair Display', Georgia, serif;
       --font-body: 'DM Sans', sans-serif;
+    }
+
+    /* ── TEMA NOCTURNO (100% Oscuro) ── */
+    :root.theme-dark {
+      --page-bg: #121212;
+      --card-bg: #1E1E1E;
+      --text-main: #EAEAEA;
+      --text-muted: #A0A0A0;
+      --text-light: #7A7A7A;
+      
+      --accent-1: #D4A373;
+      --accent-2: #E8D5A3;
+      --action: #E07A5F;
+      
+      --header-bg: #0A0A0A;
+      --modal-bg: #0A0A0A;
+      --topbar-bg: rgba(18, 18, 18, 0.92);
+      
+      --border-color: rgba(255,255,255,0.1);
+      --tag-bg: rgba(212,163,115,0.15);
+      --tag-text: #D4A373;
+      --allergen-bg: #2A2A2A;
+      --allergen-text: #EAEAEA;
+      --shadow: rgba(0,0,0,0.5);
+      --btn-text: #EAEAEA;
+    }
+
+    /* ── TEMA BODEGA (Tonos Vino) ── */
+    :root.theme-wine {
+      --page-bg: #2B0F19;
+      --card-bg: #3D1725;
+      --text-main: #FDF9F9;
+      --text-muted: #D1A3B4;
+      --text-light: #A37A88; 
+      
+      --accent-1: #D4AF37;
+      --accent-2: #E8D5A3;
+      --action: #B83A56; 
+      
+      --header-bg: #1C0A10;
+      --modal-bg: #1C0A10;
+      --topbar-bg: rgba(43, 15, 25, 0.92);
+      
+      --border-color: rgba(255,255,255,0.1);
+      --tag-bg: rgba(212,175,55,0.15);
+      --tag-text: #D4AF37;
+      --allergen-bg: #4A2031;
+      --allergen-text: #FDF9F9;
+      --shadow: rgba(0,0,0,0.4);
+      --btn-text: #FDF9F9;
+    }
+
+    /* ── TEMA MARINO (Tonos Océano) ── */
+    :root.theme-ocean {
+      --page-bg: #0A1C2C; 
+      --card-bg: #102A43; 
+      --text-main: #F0F4F8; 
+      --text-muted: #829AB1; 
+      --text-light: #627D98;
+      
+      --accent-1: #62B0E8; 
+      --accent-2: #4E8CBA;
+      --action: #D64545; 
+      
+      --header-bg: #05101A; 
+      --modal-bg: #05101A;
+      --topbar-bg: rgba(10, 28, 44, 0.92);
+      
+      --border-color: rgba(255,255,255,0.1);
+      --tag-bg: rgba(98,176,232,0.15);
+      --tag-text: #62B0E8;
+      --allergen-bg: #1A365D;
+      --allergen-text: #F0F4F8;
+      --shadow: rgba(0,0,0,0.4);
+      --btn-text: #F0F4F8;
+    }
+
+    /* ── TEMA BOSQUE (Tonos Naturaleza) ── */
+    :root.theme-forest {
+      --page-bg: #1A2215; 
+      --card-bg: #2D3A26; 
+      --text-main: #F4F6F0; 
+      --text-muted: #9AA88D; 
+      --text-light: #6B7B5A;
+      
+      --accent-1: #E0C097; 
+      --accent-2: #C4A47C;
+      --action: #BC6C25; 
+      
+      --header-bg: #0D120B; 
+      --modal-bg: #0D120B;
+      --topbar-bg: rgba(26, 34, 21, 0.92);
+      
+      --border-color: rgba(255,255,255,0.1);
+      --tag-bg: rgba(224,192,151,0.15);
+      --tag-text: #E0C097;
+      --allergen-bg: #3A4A32;
+      --allergen-text: #F4F6F0;
+      --shadow: rgba(0,0,0,0.4);
+      --btn-text: #F4F6F0;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
       font-family: var(--font-body);
-      background: var(--cream);
-      color: var(--charcoal);
+      background: var(--page-bg);
+      color: var(--text-main);
       min-height: 100vh;
       overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
     }
 
     /* ── LANGUAGE MODAL ── */
     #lang-modal {
       position: fixed; inset: 0; z-index: 9999;
-      background: var(--charcoal);
+      background: var(--modal-bg);
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 2rem;
       padding: 2rem;
       transition: opacity 0.5s ease;
     }
     #lang-modal.hidden { opacity: 0; pointer-events: none; }
-    .lang-title {
-      font-family: var(--font-display);
-      color: var(--gold);
-      font-size: clamp(2rem, 6vw, 3.5rem);
-      text-align: center;
-      letter-spacing: 0.02em;
-    }
-    .lang-subtitle {
-      color: #9A9080;
-      font-size: 0.95rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .lang-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 1rem; width: 100%; max-width: 380px;
-    }
-    .lang-btn {
-      background: none; border: 1px solid #3A3830;
-      color: var(--cream); padding: 1.2rem;
-      font-family: var(--font-body); font-size: 1rem;
-      cursor: pointer; border-radius: 4px;
-      display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
-      transition: all 0.25s;
-    }
-    .lang-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+    .lang-title { font-family: var(--font-display); color: var(--accent-2); font-size: clamp(2rem, 6vw, 3.5rem); text-align: center; letter-spacing: 0.02em; }
+    .lang-subtitle { color: var(--text-light); font-size: 0.95rem; letter-spacing: 0.1em; text-transform: uppercase; text-align: center; }
+    .lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; width: 100%; max-width: 380px; }
+    .lang-btn { background: none; border: 1px solid rgba(255,255,255,0.2); color: var(--btn-text); padding: 1.2rem; font-family: var(--font-body); font-size: 1rem; cursor: pointer; border-radius: 4px; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; transition: all 0.25s; }
+    .lang-btn:hover { border-color: var(--accent-2); color: var(--accent-2); background: rgba(255,255,255,0.05); }
     .lang-btn span:first-child { font-size: 1.8rem; }
     .lang-btn small { font-size: 0.75rem; opacity: 0.6; letter-spacing: 0.08em; }
 
     /* ── OFFER MODAL ── */
-    .modal {
-      position: fixed; inset: 0; z-index: 9999;
-      background: rgba(28,28,26,0.8);
-      display: none; align-items: center; justify-content: center;
-      flex-direction: column; gap: 2rem;
-      padding: 2rem;
-    }
-    .modal-content {
-      background: var(--warm-white);
-      padding: 2rem; border-radius: 12px;
-      text-align: center; max-width: 400px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      position: relative;
-    }
-    .modal-content h2 {
-      color: var(--rust); margin-bottom: 1rem;
-      font-family: var(--font-display);
-    }
-    .modal-content p {
-      margin-bottom: 1.5rem;
-    }
-    .modal-btn {
-      background: var(--rust); color: white;
-      border: none; padding: 0.8rem 1.5rem;
-      border-radius: 8px; cursor: pointer;
-      font-size: 1rem;
-    }
-    .modal-btn:hover { background: #B84A1F; }
-    .close-modal-btn {
-      position: absolute; top: 10px; right: 10px;
-      background: none; border: none;
-      font-size: 1.5rem; cursor: pointer;
-      color: var(--charcoal);
-    }
-    .close-modal-btn:hover { color: var(--rust); }
+    .modal { position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.8); display: none; align-items: center; justify-content: center; flex-direction: column; gap: 2rem; padding: 2rem; }
+    .modal-content { background: var(--card-bg); color: var(--text-main); padding: 2rem; border-radius: 12px; text-align: center; max-width: 400px; box-shadow: 0 10px 30px var(--shadow); position: relative; }
+    .modal-content h2 { color: var(--action); margin-bottom: 1rem; font-family: var(--font-display); }
+    .modal-content p { margin-bottom: 1.5rem; }
+    .modal-btn { background: var(--action); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+    .modal-btn:hover { opacity: 0.9; }
+    .close-modal-btn { position: absolute; top: 10px; right: 10px; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); transition: color 0.2s;}
+    .close-modal-btn:hover { color: var(--action); }
 
     /* ── HEADER ── */
     header {
-      background: var(--charcoal);
+      background-color: var(--header-bg);
+      background-size: cover;
+      background-position: center;
       padding: 2.5rem 1.5rem 2rem;
       text-align: center;
       position: relative;
       overflow: hidden;
     }
     header::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse at 60% 0%, rgba(201,168,76,0.15), transparent 60%);
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 60% 0%, rgba(255,255,255,0.05), transparent 60%); z-index: 1;
     }
-    .header-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+    .header-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.65); z-index: 0; display: none; }
+    .header-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
     .restaurant-name {
-      font-family: var(--font-display);
-      color: var(--gold);
-      font-size: clamp(2rem, 8vw, 3.8rem);
-      line-height: 1.05;
-      letter-spacing: -0.01em;
+      font-family: var(--font-display); color: var(--accent-2);
+      font-size: clamp(2rem, 8vw, 3.8rem); line-height: 1.05; letter-spacing: -0.01em; text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
     .restaurant-tagline {
-      color: #9A9080;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-top: 0.6rem;
+      color: var(--accent-2); opacity: 0.9; font-size: 0.85rem; letter-spacing: 0.15em;
+      text-transform: uppercase; margin-top: 0.6rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
     .header-divider {
       width: 60px; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      background: linear-gradient(to right, transparent, var(--accent-2), transparent);
       margin: 1.2rem auto;
     }
 
     /* ── TOP BAR ── */
     .top-bar {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(245,240,232,0.92);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(139,94,60,0.15);
-      padding: 0.6rem 1rem;
-      display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
+      position: sticky; top: 0; z-index: 100; background: var(--topbar-bg);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color);
+      padding: 0.6rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 0.8rem;
     }
-    .lang-change-btn {
-      background: none; border: 1px solid var(--brown);
-      color: var(--brown); padding: 0.35rem 0.8rem;
-      border-radius: 20px; font-size: 0.78rem;
-      cursor: pointer; font-family: var(--font-body);
-      letter-spacing: 0.05em; transition: all 0.2s;
-      display: flex; align-items: center; gap: 0.4rem;
-      flex-shrink: 0;
+    .lang-change-btn, .filter-btn {
+      background: none; border: 1px solid var(--accent-1); color: var(--accent-1);
+      padding: 0.35rem 0.8rem; border-radius: 20px; font-size: 0.78rem;
+      cursor: pointer; font-family: var(--font-body); letter-spacing: 0.05em; transition: all 0.2s;
+      display: flex; align-items: center; gap: 0.4rem; flex-shrink: 0;
     }
-    .lang-change-btn:hover { background: var(--brown); color: white; }
-    .filter-btn {
-      background: none; border: 1px solid var(--brown);
-      color: var(--brown); padding: 0.35rem 0.8rem;
-      border-radius: 20px; font-size: 0.78rem;
-      cursor: pointer; font-family: var(--font-body);
-      letter-spacing: 0.05em; transition: all 0.2s;
-      display: flex; align-items: center; gap: 0.4rem;
-      flex-shrink: 0;
-    }
-    .filter-btn:hover { background: var(--brown); color: white; }
-    .category-scroll {
-      display: flex; gap: 0.5rem;
-      overflow-x: auto; scrollbar-width: none;
-      -webkit-overflow-scrolling: touch;
-      flex: 1;
-    }
+    .lang-change-btn:hover, .filter-btn:hover { background: var(--accent-1); color: var(--card-bg); }
+    .category-scroll { display: flex; gap: 0.5rem; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; flex: 1; }
     .category-scroll::-webkit-scrollbar { display: none; }
     .cat-pill {
-      flex-shrink: 0;
-      background: none; border: 1px solid transparent;
-      color: var(--charcoal); padding: 0.35rem 0.9rem;
-      border-radius: 20px; font-size: 0.8rem;
-      cursor: pointer; font-family: var(--font-body);
-      white-space: nowrap; transition: all 0.2s;
+      flex-shrink: 0; background: none; border: 1px solid transparent;
+      color: var(--text-main); padding: 0.35rem 0.9rem; border-radius: 20px;
+      font-size: 0.8rem; cursor: pointer; font-family: var(--font-body); white-space: nowrap; transition: all 0.2s;
     }
-    .cat-pill.active, .cat-pill:hover {
-      background: var(--charcoal); color: var(--cream); border-color: var(--charcoal);
-    }
+    .cat-pill.active, .cat-pill:hover { background: var(--text-main); color: var(--card-bg); border-color: var(--text-main); }
 
     /* ── ORDER BADGE ── */
     .order-fab {
       position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
-      background: var(--rust); color: white;
-      border: none; border-radius: 50px;
-      padding: 0.9rem 1.4rem;
-      font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+      background: var(--action); color: white; border: none; border-radius: 50px;
+      padding: 0.9rem 1.4rem; font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
       cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
-      box-shadow: 0 4px 20px rgba(196,92,38,0.45);
-      transition: transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3); transition: transform 0.2s, box-shadow 0.2s;
     }
-    .order-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(196,92,38,0.5); }
+    .order-fab:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(0,0,0,0.4); }
     .order-fab.hidden { display: none; }
-    .order-badge {
-      background: white; color: var(--rust);
-      border-radius: 50%; width: 22px; height: 22px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.75rem; font-weight: 700;
-    }
+    .order-badge { background: white; color: var(--action); border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
 
     /* ── MAIN CONTENT ── */
-    main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 6rem; }
+    main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 2rem; }
 
     .section-title {
-      font-family: var(--font-display);
-      font-size: 1.6rem; color: var(--charcoal);
-      margin: 2.5rem 0 1.2rem;
-      padding-bottom: 0.6rem;
-      border-bottom: 1px solid rgba(139,94,60,0.2);
+      font-family: var(--font-display); font-size: 1.6rem; color: var(--text-main);
+      margin: 2.5rem 0 1.2rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border-color);
       display: flex; align-items: center; gap: 0.6rem;
     }
     .section-title .emoji { font-size: 1.3rem; }
 
-    /* ── ITEM CARDS ── */
-    .items-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.2rem;
-    }
+    /* ── ITEM CARDS & BADGES ── */
+    .items-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; }
 
     .item-card {
-      background: var(--warm-white);
-      border-radius: 12px;
-      overflow: hidden;
-      cursor: pointer;
-      box-shadow: 0 2px 8px var(--shadow);
-      transition: transform 0.25s, box-shadow 0.25s;
-      position: relative;
+      background: var(--card-bg); border-radius: 12px; overflow: hidden; cursor: pointer;
+      box-shadow: 0 2px 8px var(--shadow); transition: transform 0.25s, box-shadow 0.25s; position: relative;
     }
     .item-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px var(--shadow); }
-    .item-card.unavailable { opacity: 0.5; pointer-events: none; }
-    .item-card.allergic { border: 3px solid var(--rust); background: rgba(196, 92, 38, 0.1); }
+    
+    .item-card.unavailable .card-img-wrap img, 
+    .item-card.unavailable .card-img-placeholder { filter: grayscale(100%); opacity: 0.6; }
+    
+    .item-card.allergic { border: 3px solid var(--action); }
+
+    .card-badges { position: absolute; top: 10px; left: 10px; display: flex; flex-direction: column; gap: 0.4rem; z-index: 5; pointer-events: none; }
+    .badge {
+      padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.65rem; font-weight: 700; font-family: var(--font-body);
+      text-transform: uppercase; letter-spacing: 0.05em; box-shadow: 0 2px 8px rgba(0,0,0,0.25); backdrop-filter: blur(4px);
+    }
+    .badge-new { background: rgba(122,140,110,0.95); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .badge-soldout { background: rgba(196,92,38,0.95); color: white; border: 1px solid rgba(255,255,255,0.2); }
+    .badge-recommended { background: rgba(59, 130, 246, 0.95); color: white; border: 1px solid rgba(255,255,255,0.2); }
 
     .card-img-wrap { height: 170px; overflow: hidden; position: relative; }
-    .card-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform 0.4s ease;
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; user-select: none; }
     .item-card:hover .card-img-wrap img { transform: scale(1.06); }
-    .card-img-placeholder {
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, var(--gold-light), var(--cream));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
+    .card-img-placeholder { width: 100%; height: 100%; background: var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--text-main); }
 
     .card-body { padding: 1rem 1.1rem 0.9rem; }
-    .card-name {
-      font-family: var(--font-display);
-      font-size: 1.05rem; font-weight: 700;
-      color: var(--charcoal);
-      line-height: 1.3; margin-bottom: 0.35rem;
-    }
-    .card-desc {
-      font-size: 0.8rem; color: #6B6560;
-      line-height: 1.5;
-      display: -webkit-box; -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical; overflow: hidden;
-    }
-    .card-footer {
-      padding: 0.7rem 1.1rem 1rem;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .card-price {
-      font-size: 1.15rem; font-weight: 700; color: var(--brown);
-      font-family: var(--font-display);
-    }
-    .card-tags {
-      display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.5rem;
-    }
-    .tag {
-      font-size: 0.68rem; padding: 0.2rem 0.5rem;
-      border-radius: 10px; background: var(--gold-light);
-      color: var(--brown); letter-spacing: 0.03em;
-    }
-    .add-btn {
-      background: var(--charcoal); color: var(--cream);
-      border: none; border-radius: 50%; width: 34px; height: 34px;
-      font-size: 1.3rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, transform 0.15s;
-      flex-shrink: 0;
-    }
-    .add-btn:hover { background: var(--brown); transform: scale(1.12); }
+    .card-name { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--text-main); line-height: 1.3; margin-bottom: 0.35rem; }
+    .card-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .card-footer { padding: 0.7rem 1.1rem 1rem; display: flex; align-items: center; justify-content: space-between; }
+    .card-price { font-size: 1.15rem; font-weight: 700; color: var(--accent-1); font-family: var(--font-display); }
+    .card-tags { display: flex; gap: 0.3rem; flex-wrap: wrap; margin-top: 0.5rem; }
+    .tag { font-size: 0.68rem; padding: 0.2rem 0.5rem; border-radius: 10px; background: var(--tag-bg); color: var(--tag-text); letter-spacing: 0.03em; }
+    .add-btn { background: var(--text-main); color: var(--card-bg); border: none; border-radius: 50%; width: 34px; height: 34px; font-size: 1.3rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.15s; flex-shrink: 0; }
+    .add-btn:hover { background: var(--accent-1); transform: scale(1.12); }
 
     /* ── DETAIL PANEL ── */
-    #detail-overlay {
-      position: fixed; inset: 0; z-index: 500;
-      background: rgba(28,28,26,0.7);
-      backdrop-filter: blur(4px);
-      display: flex; align-items: flex-end; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s;
+    #detail-overlay, #order-overlay, #filter-overlay {
+      position: fixed; inset: 0; z-index: 500; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px);
+      display: flex; align-items: flex-end; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.35s;
     }
-    #detail-overlay.open { opacity: 1; pointer-events: all; }
+    #detail-overlay.open, #order-overlay.open, #filter-overlay.open { opacity: 1; pointer-events: all; }
 
-    #detail-panel {
-      background: var(--warm-white);
-      width: 100%; max-width: 640px;
-      border-radius: 20px 20px 0 0;
-      max-height: 92vh; overflow-y: auto;
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.34,1.26,0.64,1);
-      scrollbar-width: thin;
+    #detail-panel, #order-panel, #filter-panel {
+      background: var(--card-bg); color: var(--text-main); width: 100%; max-width: 640px;
+      border-radius: 20px 20px 0 0; max-height: 92vh; overflow-y: auto;
+      transform: translateY(100%); transition: transform 0.4s cubic-bezier(0.34,1.26,0.64,1);
+      scrollbar-width: thin; position: relative;
     }
-    #detail-overlay.open #detail-panel { transform: translateY(0); }
+    #detail-overlay.open #detail-panel, #order-overlay.open #order-panel, #filter-overlay.open #filter-panel { transform: translateY(0); }
 
-    .detail-img { width: 100%; height: 260px; object-fit: cover; }
-    .detail-img {
-      user-select: none;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-    }
-    .detail-img-placeholder {
-      width: 100%; height: 200px;
-      background: linear-gradient(135deg, var(--gold-light), var(--cream));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 5rem;
-    }
+    .detail-img { width: 100%; height: 260px; object-fit: cover; user-select: none; }
+    .detail-img-placeholder { width: 100%; height: 200px; background: var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--text-main); }
     .detail-content { padding: 1.5rem 1.5rem 2rem; }
-    .detail-handle {
-      width: 40px; height: 4px; background: #DDD;
-      border-radius: 2px; margin: 0 auto 1.5rem;
-    }
-    .detail-name {
-      font-family: var(--font-display);
-      font-size: 1.8rem; color: var(--charcoal);
-      line-height: 1.2; margin-bottom: 0.5rem;
-    }
-    .detail-price {
-      font-size: 1.4rem; color: var(--brown);
-      font-family: var(--font-display); font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .detail-desc {
-      font-size: 0.92rem; line-height: 1.7;
-      color: #4A4540; margin-bottom: 1.2rem;
-    }
-    .detail-section-label {
-      font-size: 0.72rem; text-transform: uppercase;
-      letter-spacing: 0.12em; color: #9A9080;
-      margin-bottom: 0.4rem;
-    }
+    .detail-handle { width: 40px; height: 4px; background: var(--border-color); border-radius: 2px; margin: 0 auto 1.5rem; }
+    .detail-name { font-family: var(--font-display); font-size: 1.8rem; color: var(--text-main); line-height: 1.2; margin-bottom: 0.5rem; }
+    .detail-price { font-size: 1.4rem; color: var(--accent-1); font-family: var(--font-display); font-weight: 700; margin-bottom: 1rem; }
+    .detail-desc { font-size: 0.92rem; line-height: 1.7; color: var(--text-muted); margin-bottom: 1.2rem; }
+    .detail-section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--text-light); margin-bottom: 0.4rem; }
     .allergen-list { display: flex; gap: 0.4rem; flex-wrap: wrap; margin-bottom: 1.2rem; }
-    .allergen-tag {
-      font-size: 0.82rem; padding: 0.35rem 0.7rem;
-      border-radius: 8px; background: #f0f0f0;
-      color: var(--charcoal); display: flex; align-items: center; gap: 0.3rem;
-    }
-    .qty-row {
-      display: flex; align-items: center; gap: 1rem;
-      margin-top: 1.5rem; padding-top: 1.2rem;
-      border-top: 1px solid rgba(139,94,60,0.15);
-    }
-    .qty-ctrl {
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .qty-btn {
-      background: var(--cream); border: 1px solid rgba(139,94,60,0.3);
-      border-radius: 50%; width: 36px; height: 36px;
-      font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: all 0.2s; color: var(--charcoal);
-    }
-    .qty-btn:hover { background: var(--charcoal); color: white; }
+    .allergen-tag { font-size: 0.82rem; padding: 0.35rem 0.7rem; border-radius: 8px; background: var(--allergen-bg); color: var(--text-main); display: flex; align-items: center; gap: 0.3rem; }
+    
+    .qty-row { display: flex; align-items: center; gap: 1rem; margin-top: 1.5rem; padding-top: 1.2rem; border-top: 1px solid var(--border-color); }
+    .qty-ctrl { display: flex; align-items: center; gap: 0.8rem; }
+    .qty-btn { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50%; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.2s; color: var(--text-main); }
+    .qty-btn:hover { background: var(--text-main); color: var(--card-bg); border-color: var(--text-main); }
     .qty-num { font-size: 1.1rem; font-weight: 600; min-width: 20px; text-align: center; }
-    .add-to-order-btn {
-      flex: 1; background: var(--charcoal); color: var(--cream);
-      border: none; border-radius: 50px; padding: 0.9rem 1.5rem;
-      font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
-      cursor: pointer; transition: background 0.2s;
-    }
-    .add-to-order-btn:hover { background: var(--brown); }
-    .close-detail-btn {
-      position: absolute; top: 1rem; right: 1rem;
-      background: rgba(28,28,26,0.6); color: white;
-      border: none; border-radius: 50%; width: 36px; height: 36px;
-      font-size: 1.1rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-    }
+    .add-to-order-btn { flex: 1; background: var(--text-main); color: var(--card-bg); border: none; border-radius: 50px; padding: 0.9rem 1.5rem; font-family: var(--font-body); font-size: 0.95rem; font-weight: 500; cursor: pointer; transition: background 0.2s; }
+    .add-to-order-btn:hover { background: var(--accent-1); }
+    
+    .close-detail-btn { position: absolute; top: 1rem; right: 1rem; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 36px; height: 36px; font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s;}
+    .close-detail-btn:hover { background: var(--action); }
 
     /* ── ORDER PANEL ── */
-    #order-overlay {
-      position: fixed; inset: 0; z-index: 600;
-      background: rgba(28,28,26,0.7);
-      backdrop-filter: blur(4px);
-      display: flex; align-items: flex-end; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s;
-    }
-    #order-overlay.open { opacity: 1; pointer-events: all; }
-
-    #order-panel {
-      background: var(--warm-white);
-      width: 100%; max-width: 640px;
-      border-radius: 20px 20px 0 0;
-      max-height: 85vh; overflow-y: auto;
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.34,1.26,0.64,1);
-      padding: 1.5rem;
-      scrollbar-width: thin;
-    }
-    #order-overlay.open #order-panel { transform: translateY(0); }
-
-    .order-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 1.2rem;
-    }
-    .order-title {
-      font-family: var(--font-display); font-size: 1.5rem;
-    }
-    .close-order-btn {
-      background: var(--cream); border: 1px solid rgba(139,94,60,0.2);
-      border-radius: 50%; width: 36px; height: 36px;
-      font-size: 1rem; cursor: pointer; color: var(--charcoal);
-      display: flex; align-items: center; justify-content: center;
-    }
-
-    .order-empty {
-      text-align: center; padding: 3rem 1rem;
-      color: #9A9080; font-size: 0.9rem;
-    }
+    #order-panel { padding: 1.5rem; }
+    .order-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.2rem; }
+    .order-title { font-family: var(--font-display); font-size: 1.5rem; }
+    .close-order-btn { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50%; width: 36px; height: 36px; font-size: 1rem; cursor: pointer; color: var(--text-main); display: flex; align-items: center; justify-content: center; }
+    .order-empty { text-align: center; padding: 3rem 1rem; color: var(--text-light); font-size: 0.9rem; }
     .order-empty .empty-icon { font-size: 3rem; display: block; margin-bottom: 0.8rem; }
-
-    .order-item-row {
-      display: flex; align-items: center; gap: 0.8rem;
-      padding: 0.8rem 0;
-      border-bottom: 1px solid rgba(139,94,60,0.1);
-    }
-    .order-item-img {
-      width: 52px; height: 52px; border-radius: 8px;
-      object-fit: cover; flex-shrink: 0;
-    }
-    .order-item-img-placeholder {
-      width: 52px; height: 52px; border-radius: 8px;
-      background: var(--gold-light); flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
-    }
+    .order-item-row { display: flex; align-items: center; gap: 0.8rem; padding: 0.8rem 0; border-bottom: 1px solid var(--border-color); }
+    .order-item-img { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+    .order-item-img-placeholder { width: 52px; height: 52px; border-radius: 8px; background: var(--border-color); color: var(--text-main); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; }
     .order-item-info { flex: 1; }
     .order-item-name { font-size: 0.88rem; font-weight: 500; }
-    .order-item-price { font-size: 0.82rem; color: var(--brown); }
-    .order-item-qty {
-      display: flex; align-items: center; gap: 0.5rem;
-    }
-    .order-qty-btn {
-      background: var(--cream); border: 1px solid rgba(139,94,60,0.3);
-      border-radius: 50%; width: 28px; height: 28px;
-      font-size: 0.9rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--charcoal); transition: all 0.2s;
-    }
-    .order-qty-btn:hover { background: var(--charcoal); color: white; }
+    .order-item-price { font-size: 0.82rem; color: var(--accent-1); }
+    .order-item-qty { display: flex; align-items: center; gap: 0.5rem; }
+    .order-qty-btn { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 50%; width: 28px; height: 28px; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; color: var(--text-main); transition: all 0.2s; }
+    .order-qty-btn:hover { background: var(--text-main); color: var(--card-bg); }
     .order-qty-num { font-size: 0.9rem; font-weight: 600; min-width: 16px; text-align: center; }
-
-    .order-total-row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.2rem 0 0.5rem;
-      font-family: var(--font-display); font-size: 1.2rem; font-weight: 700;
-    }
-    .clear-order-btn {
-      width: 100%; background: none;
-      border: 1px solid rgba(196,92,38,0.4);
-      color: var(--rust); border-radius: 50px; padding: 0.75rem;
-      font-family: var(--font-body); font-size: 0.85rem;
-      cursor: pointer; margin-top: 0.7rem; transition: all 0.2s;
-    }
-    .clear-order-btn:hover { background: var(--rust); color: white; }
-
-    .send-whatsapp-btn {
-      background: #25D366; color: white; border: none;
-      padding: 0.8rem 1rem; border-radius: 8px;
-      font-size: 0.9rem; cursor: pointer; margin-top: 1rem;
-      width: 100%; transition: background 0.2s;
-    }
+    .order-total-row { display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 0 0.5rem; font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text-main); }
+    .clear-order-btn { width: 100%; background: none; border: 1px solid rgba(196,92,38,0.4); color: var(--action); border-radius: 50px; padding: 0.75rem; font-family: var(--font-body); font-size: 0.85rem; cursor: pointer; margin-top: 0.7rem; transition: all 0.2s; }
+    .clear-order-btn:hover { background: var(--action); color: white; border-color: var(--action); }
+    .send-whatsapp-btn { background: #25D366; color: white; border: none; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.9rem; cursor: pointer; margin-top: 1rem; width: 100%; transition: background 0.2s; }
     .send-whatsapp-btn:hover { background: #128C7E; }
 
     /* ── FILTER PANEL ── */
-    #filter-overlay {
-      position: fixed; inset: 0; z-index: 400;
-      background: rgba(28,28,26,0.7);
-      backdrop-filter: blur(4px);
-      display: flex; align-items: flex-end; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.35s;
-    }
-    #filter-overlay.open { opacity: 1; pointer-events: all; }
+    .filter-header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--border-color); }
+    .filter-title { font-family: var(--font-display); font-size: 1.4rem; color: var(--text-main); }
+    .close-filter-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted); padding: 0.5rem; border-radius: 50%; transition: color 0.2s; }
+    .close-filter-btn:hover { color: var(--action); }
+    .allergen-list-panel { padding: 1rem 1.5rem; display: flex; flex-direction: column; gap: 0.8rem; }
+    .allergen-item { display: flex; align-items: center; gap: 0.8rem; }
+    .allergen-checkbox { width: 18px; height: 18px; cursor: pointer; }
+    .allergen-label { font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; }
 
-    #filter-panel {
-      background: var(--warm-white);
-      width: 100%; max-width: 500px;
-      border-radius: 20px 20px 0 0;
-      max-height: 70vh; overflow-y: auto;
-      transform: translateY(100%);
-      transition: transform 0.4s cubic-bezier(0.34,1.26,0.64,1);
-      scrollbar-width: thin;
-    }
-    #filter-overlay.open #filter-panel { transform: translateY(0); }
-
-    .filter-header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 1.5rem 1.5rem 1rem;
-      border-bottom: 1px solid rgba(139,94,60,0.2);
-    }
-    .filter-title {
-      font-family: var(--font-display);
-      font-size: 1.4rem; color: var(--charcoal);
-    }
-    .close-filter-btn {
-      background: none; border: none;
-      font-size: 1.5rem; cursor: pointer;
-      color: var(--charcoal); padding: 0.5rem;
-      border-radius: 50%; transition: background 0.2s;
-    }
-    .close-filter-btn:hover { background: rgba(139,94,60,0.1); }
-
-    .allergen-list {
+    /* ── ALLERGEN BANNER (Bottom of the menu) ── */
+    .allergen-notice-banner {
+      background: var(--tag-bg);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
       padding: 1rem 1.5rem;
-      display: flex; flex-direction: column; gap: 0.8rem;
+      margin: 0 1rem 3rem; 
+      border-radius: 8px;
+      text-align: center;
+      font-size: 0.82rem;
+      max-width: 868px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
     }
-    .allergen-item {
-      display: flex; align-items: center; gap: 0.8rem;
-    }
-    .allergen-checkbox {
-      width: 18px; height: 18px;
-      cursor: pointer;
-    }
-    .allergen-label {
-      font-size: 0.95rem; cursor: pointer;
-    }
-
-    /* ── i18n STRINGS ── */
-    [data-i18n] { }
+    @media(min-width: 900px) { .allergen-notice-banner { margin: 0 auto 3rem; } }
+    .allergen-notice-banner .icon { font-size: 1.3rem; flex-shrink: 0; }
 
     @media (max-width: 600px) {
       .items-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
@@ -558,115 +395,35 @@
       .card-name { font-size: 0.9rem; }
       .card-desc { font-size: 0.74rem; }
     }
-    @media (max-width: 380px) {
-      .items-grid { grid-template-columns: 1fr; }
-    }
-
+    @media (max-width: 380px) { .items-grid { grid-template-columns: 1fr; } }
 
     /* ── DEVELOPER / CREDITS MODAL ── */
-    #dev-modal .modal-content {
-      text-align: center;
-      max-width: 320px;
-    }
-    .dev-avatar {
-      width: 80px; height: 80px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--gold), var(--brown));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; margin: 0 auto 1rem;
-      color: white; font-weight: 900;
-      font-family: var(--font-display);
-      overflow: hidden; flex-shrink: 0;
-      box-shadow: 0 0 30px rgba(91, 74, 255, 0.6), 0 0 60px rgba(91, 74, 255, 0.3);
-    }
-    .dev-avatar img {
-      width: 100%; height: 100%; object-fit: cover;
-    }
-    .dev-name {
-      font-family: var(--font-display);
-      font-size: 1.2rem; font-weight: 700;
-      color: var(--charcoal); margin-bottom: 0.2rem;
-    }
-    .dev-tagline {
-      font-size: 0.8rem; color: #9A9080;
-      margin-bottom: 1.2rem; font-style: italic;
-    }
-    .dev-links {
-      display: flex; flex-direction: column; gap: 0.5rem;
-      margin-bottom: 1.2rem;
-    }
-    .dev-link {
-      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      padding: 0.6rem 1rem; border-radius: 8px;
-      font-size: 0.85rem; font-family: var(--font-body);
-      cursor: pointer; text-decoration: none;
-      border: 1px solid rgba(139,94,60,0.25);
-      color: var(--charcoal); background: var(--cream);
-      transition: all 0.2s;
-    }
-    .dev-link:hover { background: var(--charcoal); color: white; border-color: var(--charcoal); }
-    .dev-link.wa  { background: #25D366; color: white; border-color: #25D366; }
+    #dev-modal .modal-content { text-align: center; max-width: 320px; }
+    .dev-avatar { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-2), var(--accent-1)); display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 1rem; color: white; font-weight: 900; font-family: var(--font-display); box-shadow: 0 0 30px rgba(0,0,0,0.3); }
+    .dev-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-bottom: 0.2rem; }
+    .dev-tagline { font-size: 0.8rem; color: var(--text-light); margin-bottom: 1.2rem; font-style: italic; }
+    .dev-links { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.2rem; }
+    .dev-link { display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.85rem; font-family: var(--font-body); cursor: pointer; text-decoration: none; border: 1px solid var(--border-color); color: var(--text-main); background: var(--card-bg); transition: all 0.2s; }
+    .dev-link:hover { background: var(--text-main); color: var(--card-bg); border-color: var(--text-main); }
+    .dev-link.wa { background: #25D366; color: white; border-color: #25D366; }
     .dev-link.wa:hover { background: #1ebe5b; }
-    .dev-copyright {
-      font-size: 0.72rem; color: #C0B8B0;
-      border-top: 1px solid rgba(139,94,60,0.1);
-      padding-top: 0.8rem; margin-top: 0.5rem;
-    }
-
-    /* ── LANG MODAL DEVELOPER FOOTER ── */
-    .lang-modal-footer {
-      position: absolute; bottom: 1.5rem;
-      display: flex; align-items: center; gap: 0.5rem;
-      font-size: 0.72rem; color: #5A5450; cursor: pointer;
-      transition: color 0.2s;
-    }
-    .lang-modal-footer:hover { color: var(--gold); }
-    .lang-modal-footer span { font-size: 0.8rem; }
+    .dev-copyright { font-size: 0.72rem; color: var(--text-light); border-top: 1px solid var(--border-color); padding-top: 0.8rem; margin-top: 0.5rem; }
+    .lang-modal-footer { position: absolute; bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; color: var(--text-light); cursor: pointer; transition: color 0.2s; }
+    .lang-modal-footer:hover { color: var(--accent-2); }
 
     /* ── SHARE LOCATION FAB ── */
-    .share-fab {
-      position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 200;
-      background: var(--charcoal); color: white;
-      border: none; border-radius: 50%;
-      width: 48px; height: 48px;
-      font-size: 1.2rem; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(28,28,26,0.35);
-      transition: transform 0.2s, background 0.2s;
-    }
-    .share-fab:hover { transform: scale(1.1); background: var(--brown); }
+    .share-fab { position: fixed; bottom: 1.5rem; left: 1.5rem; z-index: 200; background: var(--text-main); color: var(--card-bg); border: none; border-radius: 50%; width: 48px; height: 48px; font-size: 1.2rem; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 16px var(--shadow); transition: transform 0.2s, background 0.2s; }
+    .share-fab:hover { transform: scale(1.1); background: var(--accent-1); color: white; }
 
     /* ── MENU FOOTER ── */
-    .menu-footer {
-      text-align: center;
-      padding: 2rem 1rem 1.5rem;
-      border-top: 1px solid rgba(139,94,60,0.12);
-      margin-top: 1rem;
-    }
-    .menu-footer-dev {
-      font-size: 0.75rem; color: #B0A89A;
-      display: flex; align-items: center; justify-content: center;
-      gap: 0.4rem; cursor: pointer; transition: color 0.2s;
-    }
-    .menu-footer-dev:hover { color: var(--gold); }
+    .menu-footer { text-align: center; padding: 2rem 1rem 1.5rem; border-top: 1px solid var(--border-color); margin-top: 1rem; }
+    .menu-footer-dev { font-size: 0.75rem; color: var(--text-light); display: flex; align-items: center; justify-content: center; gap: 0.4rem; cursor: pointer; transition: color 0.2s; }
+    .menu-footer-dev:hover { color: var(--accent-2); }
     .menu-footer-dev .dot { width: 3px; height: 3px; border-radius: 50%; background: currentColor; }
 
     /* ── DEMO BANNER ── */
-    #demo-banner {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000;
-      background: #9D4EDD;
-      color: white;
-      font-family: var(--font-body);
-      font-size: 0.8rem;
-      padding: 0.6rem 1rem;
-      text-align: center;
-      letter-spacing: 0.03em;
-    }
-    #demo-banner a {
-      color: rgba(255,255,255,0.8);
-      text-decoration: underline;
-      margin-left: 1rem;
-    }
+    #demo-banner { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9000; background: #9D4EDD; color: white; font-family: var(--font-body); font-size: 0.8rem; padding: 0.6rem 1rem; text-align: center; letter-spacing: 0.03em; }
+    #demo-banner a { color: rgba(255,255,255,0.8); text-decoration: underline; margin-left: 1rem; }
     #demo-banner.visible { display: block; }
   </style>
 </head>
@@ -679,7 +436,6 @@
   <div class="lang-grid" id="lang-grid"></div>
   <div class="lang-modal-footer" id="lang-modal-dev" onclick="openDevModal()"><span>⚡</span><span id="lang-modal-dev-name">Creado por</span></div>
 </div>
-
 
 <!-- DEVELOPER CREDITS MODAL -->
 <div id="dev-modal" class="modal">
@@ -714,7 +470,8 @@
 </div>
 
 <!-- HEADER -->
-<header>
+<header id="main-header">
+  <div class="header-overlay" id="header-overlay"></div>
   <div class="header-inner">
     <h1 class="restaurant-name" id="restaurant-name">—</h1>
     <div class="header-divider"></div>
@@ -731,6 +488,12 @@
 
 <!-- MAIN MENU -->
 <main id="menu-main"></main>
+
+<!-- AVISO ALÉRGENOS (Al final de la carta) -->
+<div class="allergen-notice-banner" id="allergen-notice-banner">
+  <span class="icon">ℹ️</span>
+  <span id="allergen-notice-text" data-i18n="allergenNotice"></span>
+</div>
 
 <!-- SHARE LOCATION FAB -->
 <button class="share-fab hidden" id="share-fab" onclick="shareLocation()" title="Compartir ubicación">📍</button>
@@ -776,37 +539,33 @@
       <h3 class="filter-title">Filtros por Alérgenos</h3>
       <button class="close-filter-btn" onclick="closeFilter(null, true)">✕</button>
     </div>
-    <div class="allergen-list" id="allergen-list"></div>
+    <div class="allergen-list-panel" id="allergen-list"></div>
   </div>
 </div>
 
 <script>
-// ── CONFIG: where is your menu.json? ──────────────────────────────────────
-// If index.html and menu.json are in the same folder, leave this as-is.
-// On GitHub Pages: they should both be in the repo root (or same subfolder).
+// ── CONFIG ──────────────────────────────────────
 const MENU_JSON_PATH = 'menu.json';
 
-// ── DEMO MODE: override current time via URL param ?demo=franja ────────────
-// e.g. ?demo=madrugada | ?demo=desayunos | ?demo=almuerzo | ?demo=merienda | ?demo=cena
-// When active, a banner is shown so it's clear this is a simulated view.
+// ── DEMO MODE ────────────
 const DEMO_TIMES = {
-  madrugada: { h: 3,  m: 0,  day: 2 },   // Martes 03:00 (cerrado)
-  desayunos:  { h: 10, m: 0,  day: 2 },   // Martes 10:00
-  almuerzo:   { h: 14, m: 0,  day: 2 },   // Martes 14:00
-  merienda:   { h: 18, m: 0,  day: 2 },   // Martes 18:00
-  cena:       { h: 22, m: 0,  day: 2 },   // Martes 22:00
-  miercoles:  { h: 14, m: 0,  day: 3 },   // Miércoles 14:00 (cerrado)
-  completa:   null,                        // Muestra TODOS los artículos
+  madrugada: { h: 3,  m: 0,  day: 2 },
+  desayunos:  { h: 10, m: 0,  day: 2 },
+  almuerzo:   { h: 14, m: 0,  day: 2 },
+  merienda:   { h: 18, m: 0,  day: 2 },
+  cena:       { h: 22, m: 0,  day: 2 },
+  miercoles:  { h: 14, m: 0,  day: 3 },
+  completa:   null,
 };
-const _demoParam = new URLSearchParams(window.location.search).get('demo');
+const urlParams = new URLSearchParams(window.location.search);
+const _demoParam = urlParams.get('demo');
 const _demoTime  = _demoParam ? DEMO_TIMES[_demoParam] : null;
 
-// isItemVisibleNow reads _DEMO_OVERRIDE instead of the real clock when in demo mode
 if (_demoParam === 'completa') { window._DEMO_COMPLETA = true; }
 if (_demoTime) {
   window._DEMO_OVERRIDE = { day: _demoTime.day, mins: _demoTime.h * 60 + _demoTime.m };
 }
-// Show demo banner for ALL demo modes (including completa)
+
 if (_demoParam) {
   document.addEventListener('DOMContentLoaded', () => {
     const LABELS = {
@@ -816,12 +575,11 @@ if (_demoParam) {
       merienda:   'Merienda · 18:00',
       cena:       'Cena · 22:00',
       miercoles:  'Miércoles · 14:00 (Cerrado)',
-      completa:   'Carta completa — todos los artículos visibles',
+      completa:   'Carta completa',
     };
     const banner = document.getElementById('demo-banner');
-    const label  = document.getElementById('demo-label');
-    if (banner && label) {
-      label.textContent = LABELS[_demoParam] || _demoParam;
+    if (banner) {
+      banner.innerHTML = `🎭 <strong>MODO DEMO</strong> — Simulando franja: <span>${LABELS[_demoParam] || _demoParam}</span> <a href="demo.html">← Volver al selector</a>`;
       banner.classList.add('visible');
     }
   });
@@ -830,10 +588,10 @@ if (_demoParam) {
 // ── STATE ──────────────────────────────────────────────────────────────────
 let lang = 'es';
 let menuData = null;
-let order = {}; // { itemId: { item, qty } }
-let selectedAllergens = []; // Selected allergens to highlight
-let tableNumber = ''; // Table number for orders
-let tableCode = ''; // Table verification code
+let order = {}; 
+let selectedAllergens =[];
+let tableNumber = '';
+let tableCode = '';
 
 const LANG_META = {
   es: { flag: '🇪🇸', label: 'Español', short: 'ES' },
@@ -852,13 +610,22 @@ const I18N = {
   allergens:    { es:'Alérgenos', en:'Allergens', fr:'Allergènes', de:'Allergene' },
   noAllergens:  { es:'Sin alérgenos declarados', en:'No declared allergens', fr:'Aucun allergène déclaré', de:'Keine Allergene' },
   unavailable:  { es:'No disponible', en:'Unavailable', fr:'Indisponible', de:'Nicht verfügbar' },
-  tableNumber: { es:'Mesa', en:'Table', fr:'Table', de:'Tisch' },
+  soldOut:      { es: 'Agotado', en: 'Sold out', fr: 'Épuisé', de: 'Ausverkauft' },
+  new:          { es: 'Novedad', en: 'New', fr: 'Nouveau', de: 'Neu' },
+  recommended:  { es: 'Recomendado', en: 'Recommended', fr: 'Recommandé', de: 'Empfohlen' },
+  tableNumber:  { es:'Mesa', en:'Table', fr:'Table', de:'Tisch' },
   tableNumberRequired: { es:'Debes indicar tu mesa', en:'Please enter your table number', fr:'Veuillez indiquer votre numéro de table', de:'Bitte geben Sie Ihre Tischnummer ein' },
   tableCode: { es:'Código de mesa', en:'Table code', fr:'Code de table', de:'Tischcode' },
   tableCodePlaceholder: { es:'Introduce el código de mesa', en:'Enter table code', fr:'Entrez le code', de:'Code eingeben' },
   tableCodeInvalid: { es:'Código de mesa incorrecto', en:'Invalid table code', fr:'Code de table invalide', de:'Ungültiger Tischcode' },
   sendWhatsApp: { es:'Enviar por WhatsApp', en:'Send via WhatsApp', fr:'Envoyer via WhatsApp', de:'Per WhatsApp senden' },
   tapToChange:  { es:'Cambiar idioma', en:'Change language', fr:'Changer langue', de:'Sprache ändern' },
+  allergenNotice: {
+    es: 'Si tiene alguna alergia o intolerancia alimentaria, por favor infórmeselo a nuestro personal.',
+    en: 'If you have a food allergy or intolerance, please inform our staff.',
+    fr: 'Si vous avez une allergie ou intolérance alimentaire, veuillez en informer notre personnel.',
+    de: 'Wenn Sie eine Lebensmittelallergie oder -unverträglichkeit haben, informieren Sie bitte unser Personal.'
+  }
 };
 
 function t(key) { 
@@ -869,26 +636,45 @@ function t(key) {
 }
 function tField(obj) { return obj && (obj[lang] || obj['es'] || obj['en'] || '') || ''; }
 
-function getUniqueAllergens() {
-  if (!menuData) return [];
-  const all = new Set();
-  menuData.items.forEach(item => {
-    const allergens = item.allergens[lang] || [];
-    allergens.forEach(a => all.add(a));
-  });
-  return Array.from(all).sort();
+// ── GOOGLE ANALYTICS ───────────────────────────────────────────────────────
+function initAnalytics() {
+  const gaId = menuData && menuData.restaurant && menuData.restaurant.googleAnalyticsId;
+  if (!gaId || window.analyticsInitialized) return;
+  window.analyticsInitialized = true;
+  
+  const script1 = document.createElement('script');
+  script1.async = true;
+  script1.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+  document.head.appendChild(script1);
+
+  const script2 = document.createElement('script');
+  script2.innerHTML = `
+    window.dataLayer = window.dataLayer ||[];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', '${gaId}');
+  `;
+  document.head.appendChild(script2);
 }
 
+// ── SISTEMA DE ALÉRGENOS REESCRITO (Siempre carga los 14 configurados) ──
 function buildAllergenFilters() {
   const list = document.getElementById('allergen-list');
-  const allergens = getUniqueAllergens();
   const allergenSettings = menuData.restaurant.allergenSettings || {};
+  
+  // Extraer las claves principales (español) y ordenarlas por su traducción actual
+  const allergens = Object.keys(allergenSettings).sort((a, b) => {
+    const nameA = (allergenSettings[a].translations && allergenSettings[a].translations[lang]) || a;
+    const nameB = (allergenSettings[b].translations && allergenSettings[b].translations[lang]) || b;
+    return nameA.localeCompare(nameB);
+  });
+
   list.innerHTML = allergens.map(a => {
-    const settings = allergenSettings[a] || {};
+    const settings = allergenSettings[a];
     const allergenName = (settings.translations && settings.translations[lang]) || a;
     return `<div class="allergen-item">
       <input type="checkbox" class="allergen-checkbox" id="allergen-${a}" ${selectedAllergens.includes(a) ? 'checked' : ''} onchange="toggleAllergen('${a}')">
-      <label for="allergen-${a}" class="allergen-label">${allergenName}</label>
+      <label for="allergen-${a}" class="allergen-label"><span>${settings.icon}</span> ${allergenName}</label>
     </div>`;
   }).join('');
 }
@@ -916,22 +702,13 @@ function closeFilter(event, force) {
   }
 }
 
-function showOfferModal() {
-  document.getElementById('offer-modal').style.display = 'flex';
-}
-
-function closeOfferModal() {
-  document.getElementById('offer-modal').style.display = 'none';
-}
-
+function showOfferModal() { document.getElementById('offer-modal').style.display = 'flex'; }
+function closeOfferModal() { document.getElementById('offer-modal').style.display = 'none'; }
 function showAlertModal(message) {
   document.getElementById('alert-message').textContent = message;
   document.getElementById('alert-modal').style.display = 'flex';
 }
-
-function closeAlertModal() {
-  document.getElementById('alert-modal').style.display = 'none';
-}
+function closeAlertModal() { document.getElementById('alert-modal').style.display = 'none'; }
 
 // ── LOAD DATA ──────────────────────────────────────────────────────────────
 async function loadMenu() {
@@ -940,13 +717,11 @@ async function loadMenu() {
     if (!res.ok) throw new Error('Could not load menu.json');
     menuData = await res.json();
   } catch(e) {
-    // Fallback: inline demo if fetch fails (e.g. file:// protocol)
     menuData = null;
     document.getElementById('menu-main').innerHTML =
-      `<p style="padding:2rem;text-align:center;color:var(--rust)">
+      `<p style="padding:2rem;text-align:center;color:var(--action)">
         ⚠️ Could not load <code>menu.json</code>.<br>
-        Make sure it's in the same folder as <code>index.html</code>.<br>
-        If testing locally, use a local server (e.g. <code>npx serve .</code>).
+        Make sure it's in the same folder as <code>index.html</code>.
       </p>`;
   }
 }
@@ -954,7 +729,7 @@ async function loadMenu() {
 // ── LANGUAGE MODAL ─────────────────────────────────────────────────────────
 function buildLangModal() {
   const grid = document.getElementById('lang-grid');
-  const langs = (menuData && menuData.restaurant.activeLanguages) || (menuData && menuData.restaurant.languages) || ['es','en','fr','de'];
+  const langs = (menuData && menuData.restaurant.activeLanguages) || (menuData && menuData.restaurant.languages) ||['es','en','fr','de'];
   grid.innerHTML = langs.map(l => {
     const m = LANG_META[l] || { flag:'🌐', label: l.toUpperCase(), short: l.toUpperCase() };
     return `<button class="lang-btn" onclick="selectLang('${l}')">
@@ -971,8 +746,8 @@ function selectLang(l) {
   const m = LANG_META[l] || { short: l.toUpperCase() };
   document.getElementById('current-lang-label').textContent = m.short;
   renderAll();
-  // Mostrar el primer mensaje cuyo schedule coincida con el momento actual
-  const messages = (menuData.restaurant.messages || []);
+  
+  const messages = (menuData.restaurant.messages ||[]);
   const activeMsg = messages.find(m => m.enabled && isItemVisibleNow({ schedule: m.schedule }));
   if (activeMsg) {
     const delay = activeMsg.delay || 1500;
@@ -984,78 +759,43 @@ function selectLang(l) {
   }
 }
 
-
 // ── DEVELOPER MODAL ────────────────────────────────────────────────────────
 function openDevModal() {
   const dev = menuData && menuData.restaurant.developer;
   if (!dev) return;
-  
-  // Set avatar (text with custom background)
   const devAvatarEl = document.getElementById('dev-avatar');
-  devAvatarEl.innerHTML = ''; // Clear previous content
-  
-  // Set background color
-  const bgColor = dev.avatarBackground || '#5B4AFF';
-  devAvatarEl.style.background = bgColor;
-  
-  // Set avatar text
-  const avatarText = dev.avatarText || '👤';
-  devAvatarEl.textContent = avatarText;
-  
+  devAvatarEl.innerHTML = ''; 
+  if (dev.avatarBackground) devAvatarEl.style.background = dev.avatarBackground;
+  devAvatarEl.textContent = dev.avatarText || '👤';
   document.getElementById('dev-name').textContent = dev.name;
   document.getElementById('dev-tagline').textContent = tField(dev.tagline) || '';
   
-  // Build links from socialLinks array
-  const links = [];
+  const links =[];
   if (dev.socialLinks && Array.isArray(dev.socialLinks)) {
     for (const link of dev.socialLinks) {
-      if (link.enabled === false) continue; // Skip disabled links
-      
+      if (link.enabled === false) continue; 
       let href = '';
-      const displayLabel = link.label; // Always use the label from config
-      
-      if (link.type === 'whatsapp') {
-        href = `https://wa.me/${link.value.replace(/\D/g,'')}`;
-      } else if (link.type === 'email') {
-        href = `mailto:${link.value}`;
-      } else if (link.type === 'website') {
-        href = link.value;
-      } else if (link.type === 'phone') {
-        href = `tel:${link.value}`;
-      } else if (link.type === 'telegram') {
-        href = link.value.startsWith('http') ? link.value : `https://t.me/${link.value}`;
-      } else if (link.type === 'instagram' || link.type === 'facebook' || link.type === 'twitter' || link.type === 'linkedin' || link.type === 'tiktok') {
-        href = link.value;
-      } else {
-        href = link.value;
-      }
-      
-      if (href) {
-        links.push({ icon: link.icon, label: displayLabel, href: href });
-      }
+      if (link.type === 'whatsapp') href = `https://wa.me/${link.value.replace(/\D/g,'')}`;
+      else if (link.type === 'email') href = `mailto:${link.value}`;
+      else if (link.type === 'website') href = link.value;
+      else if (link.type === 'phone') href = `tel:${link.value}`;
+      else if (link.type === 'telegram') href = link.value.startsWith('http') ? link.value : `https://t.me/${link.value}`;
+      else href = link.value;
+      if (href) links.push({ icon: link.icon, label: link.label, href: href });
     }
   } else {
-    // Fallback to old format for backwards compatibility
     if (dev.whatsapp) links.push({ icon:'💬', label:'WhatsApp', href:`https://wa.me/${dev.whatsapp.replace(/\D/g,'')}` });
     if (dev.email)    links.push({ icon:'✉️', label: dev.email, href:`mailto:${dev.email}` });
     if (dev.website)  links.push({ icon:'🌐', label: dev.website.replace(/https?:\/\//,''), href: dev.website });
-    if (dev.instagram)links.push({ icon:'📷', label:'Instagram', href: dev.instagram });
-    if (dev.phone)    links.push({ icon:'📞', label: dev.phone, href:`tel:${dev.phone}` });
   }
   
-  const linksHtml = links.map((l, i) =>
-    `<a class="dev-link${i===0?' wa':''}" href="${l.href}" target="_blank">${l.icon} ${l.label}</a>`
-  ).join('');
+  const linksHtml = links.map((l, i) => `<a class="dev-link${i===0?' wa':''}" href="${l.href}" target="_blank">${l.icon} ${l.label}</a>`).join('');
   document.getElementById('dev-links').innerHTML = linksHtml;
-  document.getElementById('dev-copyright').innerHTML =
-    `© ${dev.copyright || new Date().getFullYear()} ${dev.name} · Todos los derechos reservados`;
+  document.getElementById('dev-copyright').innerHTML = `© ${dev.copyright || new Date().getFullYear()} ${dev.name} · Todos los derechos reservados`;
   document.getElementById('dev-modal').style.display = 'flex';
 }
-function closeDevModal() {
-  document.getElementById('dev-modal').style.display = 'none';
-}
+function closeDevModal() { document.getElementById('dev-modal').style.display = 'none'; }
 
-// ── SHARE LOCATION ─────────────────────────────────────────────────────────
 function shareLocation() {
   const loc = menuData && menuData.restaurant.location;
   if (!loc) return;
@@ -1065,21 +805,16 @@ function shareLocation() {
   window.open(`https://wa.me/?text=${text}`, '_blank');
 }
 
-// ── UPDATE DEVELOPER UI LABELS ─────────────────────────────────────────────
 function renderDeveloperUI() {
   const dev = menuData && menuData.restaurant.developer;
   if (!dev) return;
-  // Lang modal footer
   const lmDev = document.getElementById('lang-modal-dev-name');
   if (lmDev) lmDev.textContent = `Creado por ${dev.name}`;
-  // Menu footer
   const mfDev = document.getElementById('menu-footer-dev-label');
   if (mfDev) mfDev.textContent = `© ${dev.copyright || new Date().getFullYear()} ${dev.name} · Todos los derechos reservados`;
-  // Share FAB
   const loc = menuData.restaurant.location;
   const fab = document.getElementById('share-fab');
   if (fab && loc) fab.classList.remove('hidden');
-  // Show lang modal dev footer only if configured
   const lmDevWrap = document.getElementById('lang-modal-dev');
   if (lmDevWrap && dev.showInLangModal === false) lmDevWrap.style.display = 'none';
 }
@@ -1087,11 +822,27 @@ function renderDeveloperUI() {
 // ── RENDER ALL ─────────────────────────────────────────────────────────────
 function renderAll() {
   if (!menuData) return;
+  
+  initAnalytics();
   const r = menuData.restaurant;
   renderDeveloperUI();
+  
+  document.title = r.name;
   document.getElementById('restaurant-name').textContent = r.name;
   document.getElementById('restaurant-tagline').textContent = tField(r.tagline);
-  document.title = r.name;
+  
+  const allergenBanner = document.getElementById('allergen-notice-text');
+  if (allergenBanner) allergenBanner.textContent = t('allergenNotice');
+
+  const headerEl = document.getElementById('main-header');
+  const headerOverlay = document.getElementById('header-overlay');
+  if (r.headerImage) {
+    headerEl.style.backgroundImage = `url('${r.headerImage}')`;
+    headerOverlay.style.display = 'block';
+  } else {
+    headerOverlay.style.display = 'none';
+  }
+
   renderCategoryNav();
   renderMenu();
   renderI18n();
@@ -1099,7 +850,6 @@ function renderAll() {
 
 function renderCategoryNav() {
   const nav = document.getElementById('category-nav');
-  // Only render pills for categories that currently have at least one visible item
   const visibleCatIds = new Set(
     menuData.items.filter(i => isItemVisibleNow(i)).map(i => i.category)
   );
@@ -1121,41 +871,23 @@ function scrollToCategory(id) {
   if (btn) btn.classList.add('active');
 }
 
-// ── SCHEDULE VISIBILITY ────────────────────────────────────────────────────
-// Evaluates if an item should be visible right now based on its schedule rules.
-// Rules are evaluated in order; the FIRST matching rule wins.
-// If no rule matches, falls back to schedule.defaultVisible (default: true).
-// Items without a "schedule" key are always visible.
-//
-// Schedule format per item:
-// "schedule": {
-//   "defaultVisible": true,          // shown when no rule matches (default: true)
-//   "rules": [
-//     { "days": [1,2,3,4,5,6,0],    // JS weekday: 0=Sun,1=Mon…6=Sat
-//       "from": "HH:MM",            // 24h start time (inclusive)
-//       "to":   "HH:MM",            // 24h end time (exclusive)
-//       "visible": true|false }      // what to do when this rule matches
-//   ]
-// }
 function isItemVisibleNow(item) {
-  if (window._DEMO_COMPLETA) return true; // demo=completa: show everything
-  if (!item.schedule) return true; // no schedule = always visible
-  // In demo mode, use the overridden day/time instead of the real clock
+  if (window._DEMO_COMPLETA) return true; 
+  if (!item.schedule) return true; 
   const dayOfWeek = window._DEMO_OVERRIDE ? window._DEMO_OVERRIDE.day  : new Date().getDay();
   const nowMins   = window._DEMO_OVERRIDE ? window._DEMO_OVERRIDE.mins : new Date().getHours() * 60 + new Date().getMinutes();
-  const rules = item.schedule.rules || [];
+  const rules = item.schedule.rules ||[];
   for (const rule of rules) {
-    const days = rule.days || [];
+    const days = rule.days ||[];
     if (!days.includes(dayOfWeek)) continue;
     const [fH, fM] = (rule.from || '00:00').split(':').map(Number);
-    const [tH, tM] = (rule.to   || '23:59').split(':').map(Number);
+    const[tH, tM] = (rule.to   || '23:59').split(':').map(Number);
     const fromMins = fH * 60 + fM;
     const toMins   = tH * 60 + tM;
     if (nowMins >= fromMins && nowMins < toMins) {
-      return rule.visible !== false; // default true if omitted
+      return rule.visible !== false; 
     }
   }
-  // No rule matched — use defaultVisible (default: true)
   return item.schedule.defaultVisible !== false;
 }
 
@@ -1173,7 +905,6 @@ function renderMenu() {
       </section>`;
   }).join('');
 
-  // Intersection observer for active category pill
   const sections = document.querySelectorAll('section[id^="cat-"]');
   const obs = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -1189,18 +920,28 @@ function renderMenu() {
 }
 
 function renderCard(item) {
+  let badges = '';
+  if (item.available === false) badges += `<span class="badge badge-soldout">${t('soldOut')}</span>`;
+  if (item.isNew) badges += `<span class="badge badge-new">${t('new')}</span>`;
+  if (item.isRecommended) badges += `<span class="badge badge-recommended">${t('recommended')}</span>`;
+  if (badges) badges = `<div class="card-badges">${badges}</div>`;
+
+  const fallbackHTML = `<div class=\\'card-img-placeholder\\'>${getCatEmoji(item.category)}</div>`;
   const img = item.image
-    ? `<img src="${item.image}" alt="${tField(item.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'>${getCatEmoji(item.category)}</div>'">`
+    ? `<img src="${item.image}" alt="${tField(item.name)}" loading="lazy" onerror="this.outerHTML='${fallbackHTML}'">`
     : `<div class="card-img-placeholder">${getCatEmoji(item.category)}</div>`;
-  const tags = (item.tags && tField(item.tags)) || [];
+  
+  const tags = (item.tags && tField(item.tags)) ||[];
   const tagsHtml = Array.isArray(tags) && tags.length
     ? `<div class="card-tags">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
 
-  const isAllergic = selectedAllergens.length > 0 && (item.allergens[lang] || []).some(a => selectedAllergens.includes(a));
+  // Leemos ÚNICAMENTE la clave en español para garantizar que el filtro nunca falle por temas de traducción
+  const baseAllergens = (item.allergens && item.allergens['es']) ||[];
+  const isAllergic = selectedAllergens.length > 0 && baseAllergens.some(a => selectedAllergens.includes(a));
 
   return `
     <div class="item-card${item.available === false ? ' unavailable' : ''}${isAllergic ? ' allergic' : ''}" onclick="openDetail('${item.id}')">
-      <div class="card-img-wrap">${img}</div>
+      <div class="card-img-wrap">${img}${badges}</div>
       <div class="card-body">
         <div class="card-name">${tField(item.name)}</div>
         <div class="card-desc">${tField(item.description)}</div>
@@ -1225,7 +966,6 @@ function renderI18n() {
   });
 }
 
-// ── DETAIL PANEL ──────────────────────────────────────────────────────────
 let currentDetailId = null;
 let detailQty = 1;
 
@@ -1234,25 +974,35 @@ function openDetail(itemId) {
   detailQty = 1;
   const item = menuData.items.find(i => i.id === itemId);
   if (!item) return;
-  const allergens = (item.allergens && tField(item.allergens)) || [];
+
+  let badges = '';
+  if (item.available === false) badges += `<span class="badge badge-soldout">${t('soldOut')}</span>`;
+  if (item.isNew) badges += `<span class="badge badge-new">${t('new')}</span>`;
+  if (item.isRecommended) badges += `<span class="badge badge-recommended">${t('recommended')}</span>`;
+  if (badges) badges = `<div class="card-badges">${badges}</div>`;
+
+  const fallbackHTML = `<div class=\\'detail-img-placeholder\\'>${getCatEmoji(item.category)}</div>`;
   const img = item.image
-    ? `<img class="detail-img" src="${item.image}" alt="${tField(item.name)}" onerror="this.outerHTML='<div class=\\'detail-img-placeholder\\'>${getCatEmoji(item.category)}</div>'">`
+    ? `<img class="detail-img" src="${item.image}" alt="${tField(item.name)}" onerror="this.outerHTML='${fallbackHTML}'">`
     : `<div class="detail-img-placeholder">${getCatEmoji(item.category)}</div>`;
-  const tags = (item.tags && tField(item.tags)) || [];
+    
+  const tags = (item.tags && tField(item.tags)) ||[];
   const tagsHtml = Array.isArray(tags) && tags.length
     ? `<div class="card-tags" style="margin-bottom:1rem">${tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>` : '';
   
+  // Usar SIEMPRE 'es' de forma interna para no depender de traducciones en arrays manuales
+  const baseAllergens = (item.allergens && item.allergens['es']) ||[];
   const allergenSettings = menuData.restaurant.allergenSettings || {};
-  const allergenHtml = Array.isArray(allergens) && allergens.length
-    ? allergens.map(a => {
-        const settings = allergenSettings[a] || { icon: '⚠', color: '#FFF0E8' };
+  const allergenHtml = baseAllergens.length
+    ? baseAllergens.map(a => {
+        const settings = allergenSettings[a] || { icon: '⚠', color: '#f0f0f0' };
         const allergenName = (settings.translations && settings.translations[lang]) || a;
-        return `<span class="allergen-tag" style="background-color: ${settings.color};">${settings.icon} ${allergenName}</span>`;
+        return `<span class="allergen-tag" style="background-color: ${settings.color || '#f0f0f0'}; color: var(--text-main);">${settings.icon} ${allergenName}</span>`;
       }).join('')
-    : `<span style="font-size:0.82rem;color:#9A9080">${t('noAllergens')}</span>`;
+    : `<span style="font-size:0.82rem;color:var(--text-light)">${t('noAllergens')}</span>`;
 
   document.getElementById('detail-inner').innerHTML = `
-    ${img}
+    <div style="position:relative" class="${item.available === false ? 'unavailable' : ''}">${img}${badges}</div>
     <div class="detail-content">
       <div class="detail-handle"></div>
       <div class="detail-name">${tField(item.name)}</div>
@@ -1267,7 +1017,7 @@ function openDetail(itemId) {
           <span class="qty-num" id="detail-qty">1</span>
           <button class="qty-btn" onclick="changeDetailQty(1)">+</button>
         </div>
-        <button class="add-to-order-btn" onclick="addToOrder('${item.id}', true)">
+        <button class="add-to-order-btn" onclick="addToOrder('${item.id}', true)" ${item.available === false ? 'disabled style="opacity:0.5;cursor:not-allowed;"' : ''}>
           ${t('addToOrder')}
         </button>
       </div>
@@ -1293,20 +1043,19 @@ function closeDetail(event, force) {
 function quickAdd(event, itemId) {
   event.stopPropagation();
   const item = menuData.items.find(i => i.id === itemId);
-  if (!item) return;
+  if (!item || item.available === false) return; 
   if (order[itemId]) order[itemId].qty += 1;
   else order[itemId] = { item, qty: 1 };
   updateOrderUI();
-  // Mini bounce feedback on button
   const btn = event.target;
   btn.style.transform = 'scale(1.4)';
-  btn.style.background = 'var(--brown)';
+  btn.style.background = 'var(--accent-1)';
   setTimeout(() => { btn.style.transform = ''; btn.style.background = ''; }, 300);
 }
 
 function addToOrder(itemId, fromDetail) {
   const item = menuData.items.find(i => i.id === itemId);
-  if (!item) return;
+  if (!item || item.available === false) return;
   const qty = fromDetail ? detailQty : 1;
   if (order[itemId]) order[itemId].qty += qty;
   else order[itemId] = { item, qty };
@@ -1392,8 +1141,9 @@ function renderOrderPanel() {
     return;
   }
   const rows = items.map(({ item, qty }) => {
+    const fallbackHTML = `<div class=\\'order-item-img-placeholder\\'>${getCatEmoji(item.category)}</div>`;
     const img = item.image
-      ? `<img class="order-item-img" src="${item.image}" alt="" onerror="this.outerHTML='<div class=\\'order-item-img-placeholder\\'>${getCatEmoji(item.category)}</div>'">`
+      ? `<img class="order-item-img" src="${item.image}" alt="" onerror="this.outerHTML='${fallbackHTML}'">`
       : `<div class="order-item-img-placeholder">${getCatEmoji(item.category)}</div>`;
     return `<div class="order-item-row">
       ${img}
@@ -1411,25 +1161,26 @@ function renderOrderPanel() {
   const totalPrice = items.reduce((s, { item, qty }) => s + item.price * qty, 0);
   const tableConfig = menuData.restaurant.tableCodes || {};
   const tableAuthEnabled = !!(tableConfig.enabled && tableConfig.tables && Object.keys(tableConfig.tables).length);
-  const tableOptions = tableAuthEnabled ? Object.keys(tableConfig.tables) : [];
+  const tableOptions = tableAuthEnabled ? Object.keys(tableConfig.tables) :[];
   const isTableSet = Number(tableNumber) > 0;
   const expectedCode = tableAuthEnabled ? (tableConfig.tables[tableNumber] || '') : '';
   const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
   const whatsappBtn = menuData.restaurant.whatsapp && menuData.restaurant.whatsapp.enabled 
     ? `<button class="send-whatsapp-btn" onclick="sendOrderWhatsApp()" ${isTableCodeValid ? '' : 'disabled'}>${t('sendWhatsApp') || 'WhatsApp'}</button>`
     : '';
-  const tableWarningHtml = !isTableSet ? `<div id="table-warning" class="table-warning">${t('tableNumberRequired')}</div>` : '';
-  const codeWarningHtml = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div id="code-warning" class="table-warning">${t('tableCodeInvalid')}</div>` : '';
+  const tableWarningHtml = !isTableSet ? `<div id="table-warning" class="table-warning" style="color:var(--action); font-size:0.85rem; margin-top:0.3rem;">${t('tableNumberRequired')}</div>` : '';
+  const codeWarningHtml = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div id="code-warning" class="table-warning" style="color:var(--action); font-size:0.85rem; margin-top:0.3rem;">${t('tableCodeInvalid')}</div>` : '';
+  
   const tableInput = tableAuthEnabled
-    ? `<select id="table-input" onchange="tableNumber = this.value; renderOrderPanel();" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">
+    ? `<select id="table-input" onchange="tableNumber = this.value; renderOrderPanel();" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; margin-top: .5rem; background: var(--card-bg); color: var(--text-main);">
         <option value="">${t('tableNumber') || 'Mesa'}...</option>
         ${tableOptions.map(num => `<option value="${num}" ${tableNumber === num ? 'selected' : ''}>${t('tableNumber') || 'Mesa'} ${num}</option>`).join('')}
       </select>`
-    : `<input type="number" id="table-input" min="1" value="${tableNumber}" oninput="tableNumber = this.value; renderOrderPanel();" placeholder="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">`;
+    : `<input type="number" id="table-input" min="1" value="${tableNumber}" oninput="tableNumber = this.value; renderOrderPanel();" placeholder="1" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; margin-top: .5rem; background: var(--card-bg); color: var(--text-main);">`;
   const tableCodeFields = tableAuthEnabled
     ? `<div style="margin-top: 1rem;">
-         <label>${t('tableCode') || 'Código de mesa'}:</label>
-         <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); updateTableValidation();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .25rem; text-transform: uppercase;">
+         <label style="color:var(--text-main);">${t('tableCode') || 'Código de mesa'}:</label>
+         <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); updateTableValidation();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; margin-top: .25rem; text-transform: uppercase; background: var(--card-bg); color: var(--text-main);">
          ${codeWarningHtml}
        </div>`
     : '';
@@ -1439,7 +1190,7 @@ function renderOrderPanel() {
       <span>${t('total')}</span>
       <span>${menuData.restaurant.currency}${totalPrice.toFixed(2)}</span>
     </div>
-    <div class="table-input-row">
+    <div class="table-input-row" style="color:var(--text-main); margin-top:1rem;">
       <label>${t('tableNumber') || 'Mesa / Table'}:</label>
       ${tableInput}
       ${tableWarningHtml}
@@ -1465,12 +1216,12 @@ function updateTableValidation() {
   if (codeWarningEl) {
     codeWarningEl.innerHTML = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? t('tableCodeInvalid') : '';
   } else if (tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid) {
-    // If code warning doesn't exist but should, add it
     const tableCodeFields = document.querySelector('.table-input-row div[style*="margin-top: 1rem"]');
     if (tableCodeFields) {
       const newWarning = document.createElement('div');
       newWarning.id = 'code-warning';
       newWarning.className = 'table-warning';
+      newWarning.style.cssText = 'color:var(--action); font-size:0.85rem; margin-top:0.3rem;';
       newWarning.innerHTML = t('tableCodeInvalid');
       tableCodeFields.appendChild(newWarning);
     }
@@ -1489,37 +1240,23 @@ document.getElementById('lang-change-btn').addEventListener('click', () => {
 document.getElementById('filter-btn').addEventListener('click', openFilter);
 
 // ── PROTECCIÓN DE IMÁGENES ──────────────────────────────────────────────
-// Desabilitar clic derecho en toda la página
-document.addEventListener('contextmenu', (e) => {
-  e.preventDefault();
-});
-
-// Desabilitar tap prolongado (hold) en mobile
+document.addEventListener('contextmenu', (e) => { e.preventDefault(); });
 let touchTimer;
 document.addEventListener('touchstart', (e) => {
   if (e.target.closest('img')) {
-    touchTimer = setTimeout(() => {
-      e.preventDefault();
-    }, 500);
+    touchTimer = setTimeout(() => { e.preventDefault(); }, 500);
   }
 });
-
-document.addEventListener('touchend', () => {
-  clearTimeout(touchTimer);
-});
+document.addEventListener('touchend', () => { clearTimeout(touchTimer); });
 
 // ── INIT ───────────────────────────────────────────────────────────────────
 (async () => {
   await loadMenu();
   buildLangModal();
-  // Don't auto-render — wait for lang selection
 })();
 </script>
 
 <!-- DEMO BANNER -->
-<div id="demo-banner">
-  🎭 <strong>MODO DEMO</strong> — Simulando franja: <span id="demo-label"></span>
-  <a href="demo.html">← Volver al selector</a>
-</div>
+<div id="demo-banner"></div>
 </body>
 </html>
