@@ -22,7 +22,7 @@
       "phoneNumber": "+34684003699"
     },
     "tableCodes": {
-      "enabled": true,
+      "enabled": false,
       "tables": { "1": "MESA01", "2": "MESA02", "3": "MESA03", "4": "MESA04" },
       "hint": { "es": "Introduce el código impreso en tu mesa", "en": "Enter the code printed on your table", "fr": "Entrez le code imprimé sur votre table", "de": "Geben Sie den auf Ihrem Tisch aufgedruckten Code ein" }
     },
