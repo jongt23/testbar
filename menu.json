@@ -230,20 +230,20 @@
     },
     "messages": [
       {
-        "id": "msg_antes_desayuno",
+        "id": "msg_cerrado_madrugada",
         "enabled": true,
-        "delay": 1500,
+        "delay": 1200,
         "title": {
-          "es": "☕ Abrimos pronto",
-          "en": "☕ Opening soon",
-          "fr": "☕ Ouverture bientôt",
-          "de": "☕ Bald geöffnet"
+          "es": "🌙 Estamos cerrados",
+          "en": "🌙 We are closed",
+          "fr": "🌙 Nous sommes fermés",
+          "de": "🌙 Wir haben geschlossen"
         },
         "message": {
-          "es": "En este momento estamos preparando la sala. Los desayunos empiezan a las 8:00. ¡Te esperamos!",
-          "en": "We are currently getting ready. Breakfast starts at 8:00. See you soon!",
-          "fr": "Nous préparons actuellement la salle. Le petit-déjeuner commence à 8h00. À bientôt !",
-          "de": "Wir richten uns gerade ein. Das Frühstück beginnt um 8:00 Uhr. Bis gleich!"
+          "es": "El local está cerrado en este momento. Abrimos a las 8:30 con los desayunos. ¡Te esperamos!",
+          "en": "We are currently closed. We open at 8:30 for breakfast. See you soon!",
+          "fr": "Nous sommes fermés pour le moment. Nous ouvrons à 8h30 pour le petit-déjeuner. À bientôt !",
+          "de": "Wir haben gerade geschlossen. Wir öffnen um 8:30 Uhr zum Frühstück. Bis bald!"
         },
         "schedule": {
           "defaultVisible": false,
@@ -252,34 +252,41 @@
               "days": [
                 1,
                 2,
-                3,
                 4,
                 5,
                 6,
                 0
               ],
-              "from": "07:00",
-              "to": "08:00",
+              "from": "00:00",
+              "to": "08:30",
+              "visible": true
+            },
+            {
+              "days": [
+                3
+              ],
+              "from": "00:00",
+              "to": "23:59",
               "visible": true
             }
           ]
         }
       },
       {
-        "id": "msg_oferta_comida",
+        "id": "msg_desayunos",
         "enabled": true,
-        "delay": 1500,
+        "delay": 1200,
         "title": {
-          "es": "🍽️ Menú del día",
-          "en": "🍽️ Set lunch menu",
-          "fr": "🍽️ Menu du jour",
-          "de": "🍽️ Tagesmenü"
+          "es": "☕ Servicio de desayunos",
+          "en": "☕ Breakfast service",
+          "fr": "☕ Service petit-déjeuner",
+          "de": "☕ Frühstücksservice"
         },
         "message": {
-          "es": "¡Menú del día por 12,50 €! Primer plato, segundo y postre o café incluido.",
-          "en": "Set lunch menu for €12.50! Starter, main and dessert or coffee included.",
-          "fr": "Menu du jour à 12,50 € ! Entrée, plat et dessert ou café inclus.",
-          "de": "Tagesmenü für 12,50 €! Vorspeise, Hauptgericht und Dessert oder Kaffee inklusive."
+          "es": "¡Buenos días! Ahora mismo solo servimos desayunos y bebidas. La cocina principal abre a las 12:00.",
+          "en": "Good morning! We are currently serving breakfast and drinks only. The main kitchen opens at 12:00.",
+          "fr": "Bonjour ! Nous servons uniquement les petits-déjeuners et boissons. La cuisine principale ouvre à 12h00.",
+          "de": "Guten Morgen! Wir servieren derzeit nur Frühstück und Getränke. Die Hauptküche öffnet um 12:00 Uhr."
         },
         "schedule": {
           "defaultVisible": false,
@@ -288,41 +295,68 @@
               "days": [
                 1,
                 2,
-                3,
                 4,
-                5
+                5,
+                6,
+                0
+              ],
+              "from": "08:30",
+              "to": "12:00",
+              "visible": true
+            }
+          ]
+        }
+      },
+      {
+        "id": "msg_cocina_principal",
+        "enabled": true,
+        "delay": 1200,
+        "title": {
+          "es": "🍽️ Cocina abierta",
+          "en": "🍽️ Kitchen open",
+          "fr": "🍽️ Cuisine ouverte",
+          "de": "🍽️ Küche geöffnet"
+        },
+        "message": {
+          "es": "¡Bienvenido! La cocina está en pleno servicio hasta las 16:30. Hoy tenemos secreto ibérico y arroz negro como especialidades.",
+          "en": "Welcome! The kitchen is in full service until 16:30. Today's specials: Iberian secret and black rice.",
+          "fr": "Bienvenue ! La cuisine est en plein service jusqu'à 16h30. Spécialités du jour : secret ibérique et riz noir.",
+          "de": "Willkommen! Die Küche ist bis 16:30 Uhr in vollem Betrieb. Tagesspecials: Iberisches Geheimstück und schwarzer Reis."
+        },
+        "schedule": {
+          "defaultVisible": false,
+          "rules": [
+            {
+              "days": [
+                1,
+                2,
+                4,
+                5,
+                6,
+                0
               ],
               "from": "12:00",
-              "to": "16:00",
-              "visible": true
-            },
-            {
-              "days": [
-                6,
-                0
-              ],
-              "from": "13:00",
-              "to": "17:00",
+              "to": "16:30",
               "visible": true
             }
           ]
         }
       },
       {
-        "id": "msg_entre_servicios",
+        "id": "msg_merienda",
         "enabled": true,
-        "delay": 1500,
+        "delay": 1200,
         "title": {
-          "es": "⏳ Cocina cerrada",
-          "en": "⏳ Kitchen closed",
-          "fr": "⏳ Cuisine fermée",
-          "de": "⏳ Küche geschlossen"
+          "es": "☕ Merienda y bebidas",
+          "en": "☕ Snacks & drinks",
+          "fr": "☕ Goûter et boissons",
+          "de": "☕ Snacks & Getränke"
         },
         "message": {
-          "es": "En este momento la cocina está descansando. La cena abre a las 20:30. Puedes consultar la carta mientras tanto.",
-          "en": "The kitchen is currently on a break. Dinner service opens at 20:30. Feel free to browse the menu.",
-          "fr": "La cuisine est actuellement fermée. Le service du dîner ouvre à 20h30. N'hésitez pas à consulter la carte.",
-          "de": "Die Küche macht gerade Pause. Der Abendservice öffnet um 20:30 Uhr. Sie können die Karte bereits ansehen."
+          "es": "La cocina está descansando hasta las 20:30. Puedes tomar algo de la barra: bebidas, cafés y meriendas disponibles.",
+          "en": "The kitchen is resting until 20:30. You can enjoy drinks, coffees and snacks at the bar.",
+          "fr": "La cuisine se repose jusqu'à 20h30. Profitez de nos boissons, cafés et collations au bar.",
+          "de": "Die Küche macht bis 20:30 Uhr Pause. Am Tresen sind Getränke, Kaffees und Snacks erhältlich."
         },
         "schedule": {
           "defaultVisible": false,
@@ -331,20 +365,12 @@
               "days": [
                 1,
                 2,
-                3,
                 4,
-                5
-              ],
-              "from": "16:00",
-              "to": "20:30",
-              "visible": true
-            },
-            {
-              "days": [
+                5,
                 6,
                 0
               ],
-              "from": "17:00",
+              "from": "16:30",
               "to": "20:30",
               "visible": true
             }
@@ -354,18 +380,18 @@
       {
         "id": "msg_cena",
         "enabled": true,
-        "delay": 1500,
+        "delay": 1200,
         "title": {
-          "es": "🌙 Buenas noches",
-          "en": "🌙 Good evening",
-          "fr": "🌙 Bonsoir",
-          "de": "🌙 Guten Abend"
+          "es": "🌙 Servicio de cenas",
+          "en": "🌙 Dinner service",
+          "fr": "🌙 Service du dîner",
+          "de": "🌙 Abendservice"
         },
         "message": {
-          "es": "Bienvenido a La Taberna del Sur. Esta noche tenemos lubina fresca y carrillada ibérica como especialidades.",
-          "en": "Welcome to La Taberna del Sur. Tonight's specials are fresh sea bass and Iberian pork cheeks.",
-          "fr": "Bienvenue à La Taberna del Sur. Ce soir, nos spécialités sont le bar frais et les joues de porc ibérique.",
-          "de": "Willkommen in La Taberna del Sur. Heute Abend empfehlen wir frischen Wolfsbarsch und iberische Schweinebacken."
+          "es": "¡Buenas noches! La cocina está abierta hasta las 00:00. Esta noche recomendamos el solomillo y el bacalao al pil-pil.",
+          "en": "Good evening! The kitchen is open until midnight. Tonight we recommend the tenderloin and cod pil-pil.",
+          "fr": "Bonsoir ! La cuisine est ouverte jusqu'à minuit. Ce soir nous recommandons le filet et la morue pil-pil.",
+          "de": "Guten Abend! Die Küche ist bis Mitternacht geöffnet. Heute Abend empfehlen wir Filet und Kabeljau Pil-Pil."
         },
         "schedule": {
           "defaultVisible": false,
@@ -374,7 +400,6 @@
               "days": [
                 1,
                 2,
-                3,
                 4,
                 5,
                 6,
@@ -382,42 +407,6 @@
               ],
               "from": "20:30",
               "to": "23:59",
-              "visible": true
-            }
-          ]
-        }
-      },
-      {
-        "id": "msg_cerrado",
-        "enabled": true,
-        "delay": 1500,
-        "title": {
-          "es": "🌙 Estamos cerrados",
-          "en": "🌙 We are closed",
-          "fr": "🌙 Nous sommes fermés",
-          "de": "🌙 Wir haben geschlossen"
-        },
-        "message": {
-          "es": "En este momento estamos cerrados. Los desayunos empiezan a las 8:00. ¡Hasta pronto!",
-          "en": "We are currently closed. Breakfast starts at 8:00. See you soon!",
-          "fr": "Nous sommes actuellement fermés. Le petit-déjeuner commence à 8h00. À bientôt !",
-          "de": "Wir haben derzeit geschlossen. Das Frühstück beginnt um 8:00 Uhr. Bis bald!"
-        },
-        "schedule": {
-          "defaultVisible": false,
-          "rules": [
-            {
-              "days": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                6,
-                0
-              ],
-              "from": "00:00",
-              "to": "07:00",
               "visible": true
             }
           ]
@@ -579,19 +568,26 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
           {
             "days": [
               1,
               2,
-              3,
               4,
               5,
               6,
               0
             ],
-            "from": "07:30",
+            "from": "08:30",
             "to": "12:00",
             "visible": true
           },
@@ -599,15 +595,14 @@
             "days": [
               1,
               2,
-              3,
               4,
               5,
               6,
               0
             ],
-            "from": "12:00",
-            "to": "23:59",
-            "visible": false
+            "from": "16:30",
+            "to": "20:30",
+            "visible": true
           }
         ]
       }
@@ -671,35 +666,41 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
           {
             "days": [
               1,
               2,
-              3,
               4,
               5,
               6,
               0
             ],
-            "from": "08:00",
-            "to": "12:30",
+            "from": "08:30",
+            "to": "12:00",
             "visible": true
           },
           {
             "days": [
               1,
               2,
-              3,
               4,
               5,
               6,
               0
             ],
-            "from": "12:30",
-            "to": "23:59",
-            "visible": false
+            "from": "16:30",
+            "to": "20:30",
+            "visible": true
           }
         ]
       }
@@ -749,7 +750,46 @@
         "fr": [],
         "de": []
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "e2",
@@ -808,7 +848,46 @@
           "Huevo"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "e3",
@@ -859,7 +938,46 @@
           "Huevo"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "e4",
@@ -918,7 +1036,46 @@
           "Gluten"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "e5",
@@ -969,7 +1126,46 @@
           "Gluten"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "s1",
@@ -1036,7 +1232,46 @@
           "Mostaza"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "s2",
@@ -1091,7 +1326,46 @@
           "Mostaza"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "sp1",
@@ -1140,10 +1414,20 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
           {
             "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
               4,
               5,
               6,
@@ -1155,35 +1439,16 @@
           },
           {
             "days": [
-              4,
-              5,
-              6,
-              0
-            ],
-            "from": "16:30",
-            "to": "23:59",
-            "visible": false
-          },
-          {
-            "days": [
-              4,
-              5,
-              6,
-              0
-            ],
-            "from": "00:00",
-            "to": "12:00",
-            "visible": false
-          },
-          {
-            "days": [
               1,
               2,
-              3
+              4,
+              5,
+              6,
+              0
             ],
-            "from": "00:00",
+            "from": "20:30",
             "to": "23:59",
-            "visible": false
+            "visible": true
           }
         ]
       }
@@ -1239,27 +1504,40 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
           {
             "days": [
               1,
               2,
-              3,
               4,
-              5
+              5,
+              6,
+              0
             ],
             "from": "12:00",
-            "to": "16:00",
+            "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
+              5,
               6,
               0
             ],
-            "from": "13:00",
-            "to": "17:00",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -1312,27 +1590,40 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
           {
             "days": [
               1,
               2,
-              3,
               4,
-              5
+              5,
+              6,
+              0
             ],
-            "from": "13:00",
-            "to": "15:30",
+            "from": "12:00",
+            "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
+              5,
               6,
               0
             ],
-            "from": "13:00",
-            "to": "16:30",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -1397,26 +1688,40 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
           {
             "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
               5,
               6,
               0
             ],
-            "from": "13:00",
+            "from": "12:00",
             "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
               5,
               6,
               0
             ],
-            "from": "20:00",
-            "to": "23:00",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -1463,7 +1768,46 @@
         "fr": [],
         "de": []
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "c2",
@@ -1516,36 +1860,40 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
           {
             "days": [
               1,
               2,
-              3,
               4,
-              5
+              5,
+              6,
+              0
             ],
-            "from": "20:00",
-            "to": "23:30",
+            "from": "12:00",
+            "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
+              5,
               6,
               0
             ],
-            "from": "13:30",
-            "to": "16:00",
-            "visible": true
-          },
-          {
-            "days": [
-              6,
-              0
-            ],
-            "from": "20:00",
-            "to": "23:30",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -1604,7 +1952,46 @@
           "Lácteos"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "p1",
@@ -1659,7 +2046,46 @@
           "Moluscos"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "p2",
@@ -1712,26 +2138,40 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
           {
             "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
               5,
               6,
               0
             ],
-            "from": "13:00",
+            "from": "12:00",
             "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
               5,
               6,
               0
             ],
-            "from": "20:00",
-            "to": "23:30",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -1790,7 +2230,46 @@
           "Gluten"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "po1",
@@ -1845,7 +2324,46 @@
           "Huevo"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "po2",
@@ -1904,7 +2422,46 @@
           "Lácteos"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "po3",
@@ -1967,7 +2524,46 @@
           "Soja"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "po4",
@@ -2032,10 +2628,35 @@
         "rules": [
           {
             "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
               6,
               0
             ],
-            "from": "00:00",
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
             "to": "23:59",
             "visible": true
           }
@@ -2083,7 +2704,33 @@
         "fr": [],
         "de": []
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "08:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "b2",
@@ -2122,7 +2769,33 @@
         "fr": [],
         "de": []
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "08:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "b3",
@@ -2173,7 +2846,33 @@
           "Gluten"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "08:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "b4",
@@ -2222,34 +2921,27 @@
       },
       "available": true,
       "schedule": {
-        "defaultVisible": true,
+        "defaultVisible": false,
         "rules": [
           {
             "days": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              0
+              3
             ],
-            "from": "07:30",
-            "to": "12:30",
-            "visible": true
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
           },
           {
             "days": [
               1,
               2,
-              3,
               4,
               5,
               6,
               0
             ],
-            "from": "14:30",
-            "to": "17:00",
+            "from": "08:30",
+            "to": "23:59",
             "visible": true
           }
         ]
@@ -2304,7 +2996,46 @@
           "Sulfitos"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "v2",
@@ -2355,7 +3086,46 @@
           "Sulfitos"
         ]
       },
-      "available": true
+      "available": true,
+      "schedule": {
+        "defaultVisible": false,
+        "rules": [
+          {
+            "days": [
+              3
+            ],
+            "from": "00:00",
+            "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
+            "visible": true
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "20:30",
+            "to": "23:59",
+            "visible": true
+          }
+        ]
+      }
     },
     {
       "id": "v3",
@@ -2412,19 +3182,36 @@
         "rules": [
           {
             "days": [
-              5,
-              6
+              3
             ],
-            "from": "20:00",
+            "from": "00:00",
             "to": "23:59",
+            "visible": false
+          },
+          {
+            "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
+              0
+            ],
+            "from": "12:00",
+            "to": "16:30",
             "visible": true
           },
           {
             "days": [
+              1,
+              2,
+              4,
+              5,
+              6,
               0
             ],
-            "from": "13:00",
-            "to": "17:00",
+            "from": "20:30",
+            "to": "23:59",
             "visible": true
           }
         ]
