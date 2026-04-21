@@ -839,10 +839,47 @@ function scrollToCategory(id) {
   if (btn) btn.classList.add('active');
 }
 
+// ── SCHEDULE VISIBILITY ────────────────────────────────────────────────────
+// Evaluates if an item should be visible right now based on its schedule rules.
+// Rules are evaluated in order; the FIRST matching rule wins.
+// If no rule matches, falls back to schedule.defaultVisible (default: true).
+// Items without a "schedule" key are always visible.
+//
+// Schedule format per item:
+// "schedule": {
+//   "defaultVisible": true,          // shown when no rule matches (default: true)
+//   "rules": [
+//     { "days": [1,2,3,4,5,6,0],    // JS weekday: 0=Sun,1=Mon…6=Sat
+//       "from": "HH:MM",            // 24h start time (inclusive)
+//       "to":   "HH:MM",            // 24h end time (exclusive)
+//       "visible": true|false }      // what to do when this rule matches
+//   ]
+// }
+function isItemVisibleNow(item) {
+  if (!item.schedule) return true; // no schedule = always visible
+  const now = new Date();
+  const dayOfWeek = now.getDay(); // 0=Sunday … 6=Saturday
+  const nowMins = now.getHours() * 60 + now.getMinutes();
+  const rules = item.schedule.rules || [];
+  for (const rule of rules) {
+    const days = rule.days || [];
+    if (!days.includes(dayOfWeek)) continue;
+    const [fH, fM] = (rule.from || '00:00').split(':').map(Number);
+    const [tH, tM] = (rule.to   || '23:59').split(':').map(Number);
+    const fromMins = fH * 60 + fM;
+    const toMins   = tH * 60 + tM;
+    if (nowMins >= fromMins && nowMins < toMins) {
+      return rule.visible !== false; // default true if omitted
+    }
+  }
+  // No rule matched — use defaultVisible (default: true)
+  return item.schedule.defaultVisible !== false;
+}
+
 function renderMenu() {
   const main = document.getElementById('menu-main');
   main.innerHTML = menuData.categories.map(cat => {
-    const items = menuData.items.filter(i => i.category === cat.id);
+    const items = menuData.items.filter(i => i.category === cat.id && isItemVisibleNow(i));
     if (!items.length) return '';
     return `
       <section id="cat-${cat.id}">
@@ -1095,22 +1132,31 @@ function renderOrderPanel() {
   const isTableSet = Number(tableNumber) > 0;
   const expectedCode = tableAuthEnabled ? (tableConfig.tables[tableNumber] || '') : '';
   const isTableCodeValid = !tableAuthEnabled || (isTableSet && tableCode && expectedCode && tableCode.trim().toUpperCase() === expectedCode.trim().toUpperCase());
-  const whatsappBtn = menuData.restaurant.whatsapp && menuData.restaurant.whatsapp.enabled 
+  const whatsappEnabled = menuData.restaurant.whatsapp && menuData.restaurant.whatsapp.enabled;
+  const whatsappBtn = whatsappEnabled 
     ? `<button class="send-whatsapp-btn" onclick="sendOrderWhatsApp()" ${isTableCodeValid ? '' : 'disabled'}>${t('sendWhatsApp') || 'WhatsApp'}</button>`
     : '';
   const tableWarningHtml = !isTableSet ? `<div id="table-warning" class="table-warning">${t('tableNumberRequired')}</div>` : '';
   const codeWarningHtml = tableAuthEnabled && isTableSet && tableCode && !isTableCodeValid ? `<div id="code-warning" class="table-warning">${t('tableCodeInvalid')}</div>` : '';
   const tableInput = tableAuthEnabled
-    ? `<select id="table-input" onchange="tableNumber = this.value; renderOrderPanel();" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">
+    ? `<select id="table-input" onchange="tableNumber = this.value; updateTableValidation();" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">
         <option value="">${t('tableNumber') || 'Mesa'}...</option>
         ${tableOptions.map(num => `<option value="${num}" ${tableNumber === num ? 'selected' : ''}>${t('tableNumber') || 'Mesa'} ${num}</option>`).join('')}
       </select>`
-    : `<input type="number" id="table-input" min="1" value="${tableNumber}" oninput="tableNumber = this.value; renderOrderPanel();" placeholder="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">`;
+    : `<input type="number" id="table-input" min="1" value="${tableNumber}" oninput="tableNumber = this.value; updateTableValidation();" placeholder="1" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .5rem;">`;
   const tableCodeFields = tableAuthEnabled
     ? `<div style="margin-top: 1rem;">
          <label>${t('tableCode') || 'Código de mesa'}:</label>
          <input type="text" id="table-code-input" value="${tableCode}" oninput="tableCode = this.value.trim(); updateTableValidation();" placeholder="${t('tableCodePlaceholder') || 'Introduce el código de mesa'}" style="width: 100%; padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; margin-top: .25rem; text-transform: uppercase;">
          ${codeWarningHtml}
+       </div>`
+    : '';
+  const tableSection = whatsappEnabled
+    ? `<div class="table-input-row">
+         <label>${t('tableNumber') || 'Mesa / Table'}:</label>
+         ${tableInput}
+         ${tableWarningHtml}
+         ${tableCodeFields}
        </div>`
     : '';
   list.innerHTML = `
@@ -1119,12 +1165,7 @@ function renderOrderPanel() {
       <span>${t('total')}</span>
       <span>${menuData.restaurant.currency}${totalPrice.toFixed(2)}</span>
     </div>
-    <div class="table-input-row">
-      <label>${t('tableNumber') || 'Mesa / Table'}:</label>
-      ${tableInput}
-      ${tableWarningHtml}
-      ${tableCodeFields}
-    </div>
+    ${tableSection}
     <button class="clear-order-btn" onclick="clearOrder()">${t('clearOrder')}</button>
     ${whatsappBtn}`;
 }
